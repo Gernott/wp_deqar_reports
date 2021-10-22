@@ -1,0 +1,25 @@
+<h1>Accrediation</h1>
+<f:render partial="DecisionGroup"
+          arguments="{institutionReports:institutionReports, decision:1, valid:1}"/>
+<h1>Conditional-Accrediation</h1>
+<f:render partial="DecisionGroup"
+          arguments="{institutionReports:institutionReports, decision:3, valid:1}"/>
+<h1>Non-Accrediation</h1>
+<f:render partial="DecisionGroup"
+          arguments="{institutionReports:institutionReports, decision:5, valid:1}"/>
+<h1>Exceed Accrediation</h1>
+<f:render partial="DecisionGroup"
+          arguments="{institutionReports:institutionReports, valid:0, decision1:1, decision2:3, decision3:5}"/>
+
+<h1>Approval</h1>
+<f:render partial="DecisionGroup"
+          arguments="{institutionReports:institutionReports, decision:2, valid:1}"/>
+<h1>Conditional-Approval</h1>
+<f:render partial="DecisionGroup"
+          arguments="{institutionReports:institutionReports, decision:4, valid:1}"/>
+<h1>Non-Approval</h1>
+<f:render partial="DecisionGroup"
+          arguments="{institutionReports:institutionReports, decision:6, valid:1}"/>
+<h1>Exceed Approval</h1>
+<f:render partial="DecisionGroup"
+          arguments="{institutionReports:institutionReports, valid:0, decision1: 2, decision2:4, decision3:6}"/>

@@ -1,0 +1,84 @@
+<f:layout name="Default"/>
+
+<f:section name="content">
+    <h1 style="margin-top: 20px;">Manage DEQAR reports</h1>
+
+    <script type="text/javascript">
+        function confirmAction(text) {
+            return confirm(text);
+        }
+    </script>
+    <f:flashMessages/>
+    <f:form>
+        <f:form.select name="year" options="{years}" value="{year}" prependOptionValue="" prependOptionLabel="All"
+                       additionalAttributes="{onchange: 'this.form.submit()'}" class="form-control"/>
+    </f:form>
+    <f:if condition="{reports}">
+        <f:then>
+
+            <div class="callout">
+                <div class="media">
+                    <div class="media-left"><span class="fa-stack fa-lg callout-icon"><i
+                            class="fa fa-circle fa-stack-2x"></i><i
+                            class="fa fa-info fa-stack-1x"></i></span></div>
+                    <div class="media-body">
+                        <div class="callout-body">
+                            This list shows all report records from TYPO3 and DEQAR! They are grouped by their ID (one
+                            line for a record in both
+                            systems). Usually the records in both systems are the same. But they can be different, if
+                            someone is uploading
+                            by hand in the DEQAR system or when they are uploaded into TYPO3 without transfer to DEQAR.
+                            In this case, data
+                            from TYPO3 is shown.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-space panel-default recordlist">
+                <div class="panel-heading">
+                    <div>Reports (<span class="t3js-table-total-items"><f:count>{reports}</f:count></span>)
+                    </div>
+                </div>
+                <div class="collapse in" data-state="expanded"
+                     id="recordlist-tx_webconvoekregistration_domain_model_registration">
+                    <div class="table-fit">
+                        <table data-table="tx_webconvoekregistration_domain_model_registration"
+                               class="table table-striped table-hover">
+                            <thead>
+                            <f:render partial="Report/Head" arguments="{_all}"/>
+                            </thead>
+                            <tbody>
+                            <f:for each="{reports}" as="report">
+                                <f:if condition="{report.uid}">
+                                    <f:then>
+                                        <f:render partial="Report/Typo3Report"
+                                                  arguments="{report:report, settings:settings}"/>
+                                    </f:then>
+                                    <f:else>
+                                        <f:render partial="Report/DeqarReport"
+                                                  arguments="{report:report, settings:settings}"/>
+                                    </f:else>
+                                </f:if>
+                            </f:for>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </f:then>
+        <f:else>
+            <div class="callout callout-info">
+                <div class="media">
+                    <div class="media-left"><span class="fa-stack fa-lg callout-icon"><i
+                            class="fa fa-circle fa-stack-2x"></i><i class="fa fa-info fa-stack-1x"></i></span></div>
+                    <div class="media-body"><h4 class="callout-title">No Reports</h4>
+                        <div class="callout-body">
+                            There were no DEQAR reports found in your system.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </f:else>
+    </f:if>
+
+</f:section>

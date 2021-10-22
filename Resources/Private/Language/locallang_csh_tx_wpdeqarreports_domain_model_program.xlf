@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2021-09-03T14:58:31Z"
+          product-name="wp_deqar_reports">
+        <header/>
+        <body>
+            <trans-unit id="programme_identifier.description">
+                <source>Local Identifiers</source>
+            </trans-unit>
+            <trans-unit id="programme_name_primary.description">
+                <source>programmeNamePrimary</source>
+            </trans-unit>
+            <trans-unit id="programme_qualification_primary.description">
+                <source>programmeQualificationPrimary</source>
+            </trans-unit>
+            <trans-unit id="programme_nqf_level.description">
+                <source>programmeNqfLevel</source>
+            </trans-unit>
+            <trans-unit id="programme_gf_ehea_level.description">
+                <source>programmeGfEheaLevel</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -1,0 +1,207 @@
+<html xmlns:f="https://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<h3>Report</h3>
+<hr>
+<f:if condition="{edit}">
+    <f:else>
+        <label for="transferToDeqar">
+            Transfer to Deqar
+        </label><br/>
+        <f:form.checkbox name="transferToDeqar" value="1"/>
+        <br/><br/>
+    </f:else>
+</f:if>
+
+<f:if condition="{settings.show.type}">
+    <label for="type">
+        <f:translate key="tx_wpdeqarreports_domain_model_report.type"/>
+        *
+    </label><br/>
+    <f:form.select id="type" property="type" options="{1:'institutional',2:'programme',3:'joint programme'}"
+                   value="{settings.prefill.type}" class="form-control" additionalAttributes="{required:'required'}"
+                   id="type"/>
+    <br/>
+</f:if>
+<f:if condition="{settings.show.agency}">
+    <label for="agency">
+        <f:translate key="tx_wpdeqarreports_domain_model_report.agency"/>
+        *
+    </label><br/>
+    <f:form.textfield class="form-control" property="agency" value="{settings.prefill.agency}"
+                      additionalAttributes="{required:'required'}"/>
+    <br/>
+</f:if>
+<f:if condition="{settings.show.activity}">
+    <label for="activiy">
+        <f:translate key="tx_wpdeqarreports_domain_model_report.activity"/>
+        *
+    </label><br/>
+    <f:form.select id="activity" property="activity" options="{activities}" optionLabelField="title"
+                   optionValueField="uid"
+                   value="{settings.prefill.activity}" class="form-control"/>
+    <br/>
+</f:if>
+<f:if condition="{settings.show.activity_local_identifier}">
+    <label for="activityLocalIdentifier">
+        <f:translate key="tx_wpdeqarreports_domain_model_report.activity_local_identifier"/>
+    </label><br/>
+    <f:form.textfield class="form-control" property="activityLocalIdentifier"
+                      value="{settings.prefill.activity_local_identifier}"/>
+    <br/>
+</f:if>
+<f:if condition="{settings.show.status}">
+    <label for="status">
+        <f:translate key="tx_wpdeqarreports_domain_model_report.status"/>
+        *
+    </label><br/>
+    <f:form.select id="status" property="status" options="{1:'part of obligatory EQA system',2:'voluntary'}"
+                   class="form-control" additionalAttributes="{required:'required'}"/>
+    <br/>
+</f:if>
+<label for="decision">
+    <f:translate key="tx_wpdeqarreports_domain_model_report.decision"/>
+    *
+</label><br/>
+<f:form.select id="decision" property="decision" options="{decisions}" optionLabelField="title"
+               optionValueField="uid"
+               class="form-control" additionalAttributes="{required:'required'}"/>
+<br/>
+<label for="validFrom">
+    <f:translate key="tx_wpdeqarreports_domain_model_report.valid_from"/>
+    *
+</label><br/>
+<f:form.textfield class="form-control" property="validFrom.date"
+                  value="{report.validFrom->f:format.date(format:'Y-m-d')}"
+                  type="date" additionalAttributes="{required:'required'}"/>
+<f:form.hidden property="validFrom.dateFormat" value="Y-m-d"/>
+<br/>
+<f:if condition="{settings.show.valid_to}">
+    <label for="validTo">
+        <f:translate key="tx_wpdeqarreports_domain_model_report.valid_to"/>
+    </label><br/>
+    <f:form.textfield class="form-control" property="validTo.date" value="{report.validTo->f:format.date()}"
+                      type="date"/>
+    <f:form.hidden property="validTo.dateFormat" value="Y-m-d"/>
+    <br/>
+</f:if>
+<hr/>
+<label for="fileDisplayName">
+    <f:translate key="tx_wpdeqarreports_domain_model_report.file_display_name"/>
+    *
+</label><br/>
+<f:form.textfield class="form-control" property="fileDisplayName"/>
+<br/>
+<label for="fileOriginalLocation">
+    <f:translate key="tx_wpdeqarreports_domain_model_report.file_original_location"/>
+    *
+</label><br/>
+<f:form.upload name="fileOriginalLocation" additionalAttributes="{required:required}"/>
+<br/>
+
+<f:if condition="{settings.show.file_report_language}">
+    <label for="fileReportLanguage">
+        <f:translate key="tx_wpdeqarreports_domain_model_report.file_report_language"/>
+        *
+    </label><br/>
+    <f:form.select id="fileReportLanguage" property="fileReportLanguage" options="{languages}"
+                   class="form-control"/>
+    <br/>
+</f:if>
+<hr/>
+<div id="serreportfile">
+    <f:if condition="{settings.show.ser_report_file}">
+        <label for="serReportFile">
+            <f:translate key="tx_wpdeqarreports_domain_model_report.ser_report_file"/>
+        </label><br/>
+        <f:form.upload name="serReportFile"/>
+        <br/>
+    </f:if>
+    <f:if condition="{settings.show.ser_report_name}">
+        <label for="serReportName">
+            <f:translate key="tx_wpdeqarreports_domain_model_report.ser_report_name"/>
+        </label><br/>
+        <f:form.textfield class="form-control" property="serReportName"/>
+        <br/>
+        <hr/>
+    </f:if>
+</div>
+<f:if condition="{settings.show.institution_deqar_id}">
+    <label for="institutionDeqarId">
+        <f:translate key="tx_wpdeqarreports_domain_model_report.institution_deqar_id"/>
+        *
+    </label><br/>
+    <f:form.select id="institutionDeqarId" name="institutionDeqarId" class="form-control select2" multiple="multiple"
+                   additionalAttributes="{required:'required'}"
+    />
+    <br/>
+</f:if>
+<f:if condition="{settings.show.hardcopy}">
+    <div id="hardcopy">
+        <br/>
+        <label for="hardcopy">
+            <f:translate key="tx_wpdeqarreports_domain_model_report.hardcopy"/>
+        </label><br/>
+        <f:form.checkbox property="hardcopy" value="1"/>
+        <br/>
+    </div>
+</f:if>
+<div id="programs">
+    <h3>Programs</h3>
+    <hr>
+    <template id="newProgram">
+        <li class="jsContainer list-group-item">
+            <div class="row">
+                <label for="programmeIdentifier" class="col-md-4  col-sm-12 control-label">
+                    Local Identifier
+                </label>
+                <div class="col-md-8  col-sm-12">
+                    <f:form.textfield id="programmeIdentifier" name="programs[programmeIdentifier][]"
+                                      class="form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <label for="programmeIdentifier" class="col-md-4  col-sm-12 control-label">
+                    Programme Name Primary
+                </label>
+                <div class="col-md-8  col-sm-12">
+                    <f:form.textfield id="programmeNamePrimary" name="programs[programmeNamePrimary][]"
+                                      additionalAttributes="{required:'required'}"
+                                      class="form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <label for="programmeIdentifier" class="col-md-4  col-sm-12 control-label">
+                    Programme Qualification Primary
+                </label>
+                <div class="col-md-8  col-sm-12">
+                    <f:form.textfield id="programmeQualificationPrimary"
+                                      name="programs[programmeQualificationPrimary][]"
+                                      class="form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <label for="programmeNqfLevel" class="col-md-4  col-sm-12 control-label">
+                    Programme Nqf Level
+                </label>
+                <div class="col-md-8  col-sm-12">
+                    <f:form.textfield id="programmeNqfLevel" name="programs[programmeNqfLevel][]" class="form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <label for="programmeGfEheaLevel" class="col-md-4  col-sm-12 control-label">
+                    Programme Gf Ehea Level
+                </label>
+                <div class="col-md-8  col-sm-12">
+                    <f:form.textfield id="programmeGfEheaLevel" name="programs[programmeGfEheaLevel][]"
+                                      class="form-control"/>
+                </div>
+            </div>
+        </li>
+    </template>
+    <br>
+    <div class="programs"></div>
+    <button class="btn btn-default btn-secondary" id="addprogram">
+        Add Program
+    </button>
+    <br>
+</div>
+</html>

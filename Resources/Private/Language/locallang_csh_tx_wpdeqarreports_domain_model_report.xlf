@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2021-09-03T14:58:31Z"
+          product-name="wp_deqar_reports">
+        <header/>
+        <body>
+            <trans-unit id="report_id.description">
+                <source>DEQAR uid. Return value after submit</source>
+            </trans-unit>
+            <trans-unit id="type.description">
+                <source>1 = I
+                    2 = P
+                    3 = J
+                </source>
+            </trans-unit>
+            <trans-unit id="agency.description">
+                <source>agency</source>
+            </trans-unit>
+            <trans-unit id="activity_local_identifier.description">
+                <source>Internal Id.
+                    activity or activity_local_identifier is required
+                </source>
+            </trans-unit>
+            <trans-unit id="status.description">
+                <source>1 = part of obligatory EQA system
+                    2 = voluntary
+                </source>
+            </trans-unit>
+            <trans-unit id="valid_from.description">
+                <source>validFrom</source>
+            </trans-unit>
+            <trans-unit id="valid_to.description">
+                <source>validTo</source>
+            </trans-unit>
+            <trans-unit id="ser_report_file.description">
+                <source>If in use, “hardcopy” is disabled.</source>
+            </trans-unit>
+            <trans-unit id="ser_report_name.description">
+                <source>serReportName</source>
+            </trans-unit>
+            <trans-unit id="institution_deqar_id.description">
+                <source>Multiselect, 1:n relation, saved as comma list of IDs
+                </source>
+            </trans-unit>
+            <trans-unit id="institution_name.description">
+                <source>institutionName</source>
+            </trans-unit>
+            <trans-unit id="hardcopy.description">
+                <source>If active, “ser_report_file” is disabled</source>
+            </trans-unit>
+            <trans-unit id="file_original_location.description">
+                <source>Public path to the file</source>
+            </trans-unit>
+            <trans-unit id="file_display_name.description">
+                <source>fileDisplayName</source>
+            </trans-unit>
+            <trans-unit id="file_report_language.description">
+                <source>Languages from the extension setting report_languages</source>
+            </trans-unit>
+            <trans-unit id="activity.description">
+                <source>DEQUAR activity Id.activity_local_identifier is required
+                    n:1 Relation to Activity
+                </source>
+            </trans-unit>
+            <trans-unit id="decision.description">
+                <source>n:1 Relation to Decision</source>
+            </trans-unit>
+            <trans-unit id="programs.description">
+                <source>IRRE Relation, can be none, one or more.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

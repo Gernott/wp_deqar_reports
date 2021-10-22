@@ -1,0 +1,174 @@
+<f:for each="{institutionReports}" as="decisionData">
+    <f:if condition="{decisionData.decision.uid} === {decision} || ({decisionData.decision.uid} === {decision1} || {decisionData.decision.uid} === {decision2} || {decisionData.decision.uid} === {decision3} && !{valid} && {decisionData.reports->f:count()} > 0) ">
+        <div class="i_text">
+            <table cellspacing="0" style="width:326pt" class="contenttable">
+                <tbody>
+                <f:for each="{decisionData.institutions}" as="institutionData" key="institutionId">
+                    <f:if condition="{institutionData.reports}">
+                        <f:then>
+                            <f:if condition="{valid}">
+                                <f:variable value="{institutionData.reports.0}" name="report"/>
+                                <f:if condition="{report.uid}">
+                                    <f:then>
+                                        <tr>
+                                            <td class="xl66"
+                                                style="height:15.75pt; vertical-align:middle; white-space:normal; width:80pt">
+                                                {institutionData.institution}
+                                            </td>
+                                            <td class="xl67"
+                                                style="height:15.75pt; vertical-align:middle; white-space:normal; width:83pt">
+                                                <f:if condition="{report.hardCopy}">
+                                                    <f:then>
+                                                        HC
+                                                    </f:then>
+                                                    <f:else>
+                                                        <f:if condition="{report.serReportFile}">
+                                                            <a href="/{report.serReportFile.originalResource.publicUrl}"
+                                                               target="_blank">{report.serReportName}</a>
+                                                        </f:if>
+                                                    </f:else>
+                                                </f:if>
+                                            </td>
+                                            <td class="xl67"
+                                                style="height:15.75pt; vertical-align:middle; white-space:normal; width:152pt">
+                                                <f:if condition="{report.fileOriginalLocation}">
+                                                    <a href="/{report.fileOriginalLocation.originalResource.publicUrl}"
+                                                       target="_blank">{report.fileDisplayName}</a>
+                                                </f:if>
+                                            </td>
+                                            <td class="xl67"
+                                                style="height:15.75pt; vertical-align:middle; white-space:normal; width:152pt">
+                                                <f:if condition="{report.activity}">
+                                                    {report.activity.title}
+                                                </f:if>
+                                                <f:if condition="{report.deqarData.agency_esg_activity}">
+                                                    {report.deqarData.agency_esg_activity}
+                                                </f:if>
+                                            </td>
+                                        </tr>
+                                    </f:then>
+                                    <f:else>
+                                        <tr>
+                                            <td class="xl66"
+                                                style="height:15.75pt; vertical-align:middle; white-space:normal; width:80pt">
+                                                {institutionData.institution}
+                                            </td>
+                                            <td class="xl67"
+                                                style="height:15.75pt; vertical-align:middle; white-space:normal; width:83pt">
+                                                <f:if condition="{institutionData.serReportFile}">
+                                                    <a href="/{report.serReportFile.originalResource.publicUrl}"
+                                                       target="_blank">{report.serReportName}</a>
+                                                </f:if>
+                                            </td>
+                                            <td class="xl67"
+                                                style="height:15.75pt; vertical-align:middle; white-space:normal; width:152pt">
+                                                <f:if condition="{report.decarData.report_files}">
+                                                    <a href="https://backend.deqar.eu{report.decarData.report_files.0.file}"
+                                                       target="_blank">{report.decarData.report_files.0.file_display_name}</a>
+                                                </f:if>
+                                            </td>
+                                            <td class="xl67"
+                                                style="height:15.75pt; vertical-align:middle; white-space:normal; width:152pt">
+                                                <f:if condition="{report.activity}">
+                                                    {report.activity.title}
+                                                </f:if>
+                                                <f:if condition="{report.deqarData.agency_esg_activity}">
+                                                    {report.deqarData.agency_esg_activity}
+                                                </f:if>
+                                            </td>
+                                        </tr>
+                                    </f:else>
+
+                                </f:if>
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="!{valid}">
+                                <f:variable value="{institutionData.invalid_reports.0}" name="report"/>
+                                <f:if condition="{report.uid}">
+                                    <f:then>
+                                        <tr>
+                                            <td class="xl66"
+                                                style="height:15.75pt; vertical-align:middle; white-space:normal; width:80pt">
+                                                {institutionData.institution}
+                                            </td>
+                                            <td class="xl67"
+                                                style="height:15.75pt; vertical-align:middle; white-space:normal; width:83pt">
+                                                <f:if condition="{report.hardCopy}">
+                                                    <f:then>
+                                                        HC
+                                                    </f:then>
+                                                    <f:else>
+                                                        <f:if condition="{report.serReportFile}">
+                                                            <a href="/{report.serReportFile.originalResource.publicUrl}"
+                                                               target="_blank">{report.serReportName}</a>
+                                                        </f:if>
+                                                    </f:else>
+                                                </f:if>
+                                            </td>
+                                            <td class="xl67"
+                                                style="height:15.75pt; vertical-align:middle; white-space:normal; width:152pt">
+                                                <f:if condition="{report.fileOriginalLocation}">
+                                                    <a href="/{report.fileOriginalLocation.originalResource.publicUrl}"
+                                                       target="_blank">{report.fileDisplayName}</a>
+                                                </f:if>
+                                            </td>
+                                            <td class="xl67"
+                                                style="height:15.75pt; vertical-align:middle; white-space:normal; width:152pt">
+                                                <f:if condition="{report.activity}">
+                                                    {report.activity.title}
+                                                </f:if>
+                                                <f:if condition="{report.deqarData.agency_esg_activity}">
+                                                    {report.deqarData.agency_esg_activity}
+                                                </f:if>
+                                            </td>
+                                        </tr>
+                                    </f:then>
+                                    <f:else>
+                                        <tr>
+                                            <td class="xl66"
+                                                style="height:15.75pt; vertical-align:middle; white-space:normal; width:80pt">
+                                                {institutionData.institution}
+                                            </td>
+                                            <td class="xl67"
+                                                style="height:15.75pt; vertical-align:middle; white-space:normal; width:83pt">
+                                                <f:if condition="{report.hardCopy}">
+                                                    <f:then>
+                                                        HC
+                                                    </f:then>
+                                                    <f:else>
+                                                        <f:if condition="{report.serReportFile}">
+                                                            <a href="/{report.serReportFile.originalResource.publicUrl}"
+                                                               target="_blank">{report.serReportName}</a>
+                                                        </f:if>
+                                                    </f:else>
+                                                </f:if>
+                                            </td>
+                                            <td class="xl67"
+                                                style="height:15.75pt; vertical-align:middle; white-space:normal; width:152pt">
+                                                <f:if condition="{report.decarData.report_files}">
+                                                    <a href="https://backend.deqar.eu{report.decarData.report_files.0.file}"
+                                                       target="_blank">{report.decarData.report_files.0.file_display_name}</a>
+                                                </f:if>
+                                            </td>
+                                            <td class="xl67"
+                                                style="height:15.75pt; vertical-align:middle; white-space:normal; width:152pt">
+                                                <f:if condition="{report.activity}">
+                                                    {report.activity.title}
+                                                </f:if>
+                                                <f:if condition="{report.deqarData.agency_esg_activity}">
+                                                    {report.deqarData.agency_esg_activity}
+                                                </f:if>
+                                            </td>
+                                        </tr>
+                                    </f:else>
+                                </f:if>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </f:for>
+                </tbody>
+            </table>
+        </div>
+    </f:if>
+</f:for>

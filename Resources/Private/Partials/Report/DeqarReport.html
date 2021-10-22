@@ -1,0 +1,98 @@
+<html xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
+<tr >
+    <f:if condition="{settings.show.type}">
+        <td nowrap="nowrap" class="col-icon" title="{f:translate(id: 'report_type_{report.type}')}">
+            <f:image src="EXT:wp_deqar_reports/Resources/Public/Icons/report_type_{report.type}.svg"/>
+        </td>
+    </f:if>
+    <td nowrap="nowrap" class="col-icon">
+        <f:if condition="{report.uid}">
+            <f:image src="EXT:wp_deqar_reports/Resources/Public/Icons/typo3.svg" title="TYPO3: {report.uid}"/>
+        </f:if>
+        <f:if condition="{report.reportId}">
+            <f:image src="EXT:wp_deqar_reports/Resources/Public/Icons/deqar.svg" title="Deqar: {report.reportId}"/>
+        </f:if>
+    </td>
+    <f:if condition="{settings.show.agency}">
+        <td nowrap="nowrap" class="" title="{report.deqarData.agency_name}">{report.deqarData.agency_acronym}</td>
+    </f:if>
+    <f:if condition="{settings.show.activity}">
+        <td nowrap="nowrap" class="" title="{report.deqarData.agency_esg_activity}">
+            <f:format.crop maxCharacters="20">{report.deqarData.agency_esg_activity}</f:format.crop>
+        </td>
+    </f:if>
+    <f:if condition="{settings.show.activity_local_identifier}">
+        <td nowrap="nowrap" class="">-</td>
+    </f:if>
+    <f:if condition="{settings.show.status}">
+        <td nowrap="nowrap" class="">{report.deqarData.status}</td>
+    </f:if>
+    <td nowrap="nowrap" class="">{report.deqarData.decision}</td>
+    <td nowrap="nowrap" class="">
+        <f:format.date format="{settings.date_format}">{report.deqarData.valid_from}</f:format.date>
+    </td>
+    <f:if condition="{settings.show.valid_to}">
+        <td nowrap="nowrap" class="">
+            <f:format.date format="{settings.date_format}">{report.deqarData.valid_to}</f:format.date>
+        </td>
+    </f:if>
+    <!--@formatter:off-->
+    <td nowrap="nowrap" class="">
+        <f:for each="{report.deqarData.report_files}" as="file" >
+            <a href="https://backend.deqar.eu/{file.file}" class="btn btn-default btn-sm"
+               target="_blank">{file.file_display_name}<f:if condition="{settings.show.file_report_language}"> (<f:for each="{file.languages}" as="language" >{language}</f:for>)</f:if></a> <br>
+        </f:for>
+    </td>
+    <!--@formatter:on-->
+    <f:if condition="{settings.show.ser_report_file}">
+        <td nowrap="nowrap" class="">
+            -
+        </td>
+    </f:if>
+    <f:if condition="{settings.show.institution_deqar_id}">
+        <td nowrap="nowrap" class="" title="{report.deqarData.institutions.0.name_primary} {report.deqarData.institutions.0.deqar_id}"><f:format.crop maxCharacters="20" respectWordBoundaries="true">{report.deqarData.institutions.0.name_primary}</f:format.crop></td>
+    </f:if>
+    <td nowrap="nowrap" class="">
+        <f:if condition="{report.deqarData.programmes}">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <f:if condition="{settings.show.programme_identifier}">
+                        <th nowrap="nowrap" class="">Identifier</th>
+                    </f:if>
+                    <f:if condition="{settings.show.programme_qualification_primary}">
+                        <th nowrap="nowrap" class="">Name primary</th>
+                        <th nowrap="nowrap" class="">Qualification</th>
+                    </f:if>
+                    <f:if condition="{settings.show.programme_nqf_level}">
+                        <th nowrap="nowrap" class="">NQF level</th>
+                    </f:if>
+                    <f:if condition="{settings.show.programme_qf_ehea_level}">
+                        <th nowrap="nowrap" class="">QF EHEA level</th>
+                    </f:if>
+                </tr>
+                </thead>
+                <tbody>
+                <f:for each="{report.deqarData.programmes}" as="program">
+                    <tr>
+                        <f:if condition="{settings.show.programme_identifier}">
+                            <td nowrap="nowrap" class="">{program.id}</td>
+                        </f:if>
+                        <f:if condition="{settings.show.programme_qualification_primary}">
+                            <td nowrap="nowrap" class="">{program.name_primary}</td>
+                            <td nowrap="nowrap" class="">-</td>
+                        </f:if>
+                        <f:if condition="{settings.show.programme_nqf_level}">
+                            <td nowrap="nowrap" class="">{program.nqf_level}</td>
+                        </f:if>
+                        <f:if condition="{settings.show.programme_qf_ehea_level}">
+                            <td nowrap="nowrap" class="">{program.qf_ehea_level}</td>
+                        </f:if>
+                    </tr>
+                </f:for>
+                </tbody>
+            </table>
+        </f:if>
+    </td>
+</tr>
+</html>

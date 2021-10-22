@@ -1,0 +1,124 @@
+<html xmlns:f="https://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<table class="tx-wp-deqar-reports">
+    <tr>
+        <td>
+            <f:translate key="tx_wpdeqarreports_domain_model_report.report_id"/>
+        </td>
+        <td>
+            {report.reportId}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_wpdeqarreports_domain_model_report.type"/>
+        </td>
+        <td>
+            {report.type}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_wpdeqarreports_domain_model_report.agency"/>
+        </td>
+        <td>
+            {report.agency}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_wpdeqarreports_domain_model_report.activity_local_identifier"/>
+        </td>
+        <td>
+            {report.activityLocalIdentifier}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_wpdeqarreports_domain_model_report.status"/>
+        </td>
+        <td>
+            {report.status}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_wpdeqarreports_domain_model_report.valid_from"/>
+        </td>
+        <td>
+            {report.validFrom -> f:format.date()}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_wpdeqarreports_domain_model_report.valid_to"/>
+        </td>
+        <td>
+            {report.validTo -> f:format.date()}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_wpdeqarreports_domain_model_report.ser_report_file"/>
+        </td>
+        <td>
+            {report.serReportFile.originalResource.name}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_wpdeqarreports_domain_model_report.ser_report_name"/>
+        </td>
+        <td>
+            {report.serReportName}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_wpdeqarreports_domain_model_report.institution_deqar_id"/>
+        </td>
+        <td>
+            {report.institutionDeqarId}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_wpdeqarreports_domain_model_report.institution_name"/>
+        </td>
+        <td>
+            {report.institutionName}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_wpdeqarreports_domain_model_report.hardcopy"/>
+        </td>
+        <td>
+            {report.hardcopy}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_wpdeqarreports_domain_model_report.file_original_location"/>
+        </td>
+        <td>
+            {report.fileOriginalLocation.originalResource.name}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_wpdeqarreports_domain_model_report.file_display_name"/>
+        </td>
+        <td>
+            {report.fileDisplayName}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_wpdeqarreports_domain_model_report.file_report_language"/>
+        </td>
+        <td>
+            {report.fileReportLanguage}
+        </td>
+    </tr>
+</table>
+</html>

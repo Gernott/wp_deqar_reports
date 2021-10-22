@@ -1,0 +1,61 @@
+<html xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:be.container includeCssFiles="{0: '{f:uri.resource(path:\'Css/select2.min.css\')}'}"
+                includeRequireJsModules="{
+   0:'TYPO3/CMS/WpDeqarReports/Scripts'
+}">
+
+    <div class="typo3-fullDoc">
+        <div id="typo3-docheader">
+            <div class="typo3-docheader-functions">
+                <div class="left">
+                    <f:be.buttons.csh/>
+                </div>
+                <div class="right">
+                    <f:be.pagePath/>
+                    <f:be.pageInfo/>
+                </div>
+            </div>
+            <div class="typo3-docheader-buttons">
+                <div class="left">
+                    <f:link.action action="new" controller="Report" class="btn btn-default">
+                        <core:icon identifier="actions-document-new"/>
+                        Add new Report
+                    </f:link.action>
+                </div>
+                <div class="right">
+                    <f:be.buttons.shortcut/>
+                </div>
+            </div>
+
+        </div>
+        <div id="typo3-docbody">
+            <div id="typo3-inner-docbody">
+                <f:flashMessages/>
+                <f:render section="content"/>
+            </div>
+        </div>
+    </div>
+</f:be.container>
+<style type="text/css">
+    #typo3-docheader .typo3-docheader-buttons {
+        height: 38px;
+    }
+
+    #typo3-docheader {
+        background: #eee;
+        z-index: 10;
+        position: relative;
+    }
+
+    form.tabpanel {
+        background: #f5f5f5;
+        padding: 20px;
+        border: 1px solid #c3c3c3;
+    }
+
+    hr {
+        background: #c3c3c3;
+    }
+</style>
+<script src="/typo3conf/ext/wp_deqar_reports/Resources/Public/JavaScript/Select2.js" defer></script>
+</html>

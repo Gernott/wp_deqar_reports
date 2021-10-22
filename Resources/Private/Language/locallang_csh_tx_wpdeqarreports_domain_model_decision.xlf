@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2021-09-03T14:58:31Z"
+          product-name="wp_deqar_reports">
+        <header/>
+        <body>
+            <trans-unit id="title.description">
+                <source>Internal name</source>
+            </trans-unit>
+            <trans-unit id="dequar_decision.description">
+                <source>ID of the DEQAR decision</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

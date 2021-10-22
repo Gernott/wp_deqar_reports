@@ -1,0 +1,101 @@
+# cat=basic/enable; type=string; label=DEQAR API Token
+authorization_token =
+
+# cat=basic/enable; type=string; label=DEQAR API URL:Can be a sandbox URL too
+report_submission_endpoint =
+
+# cat=basic/enable; type=string; label=Date format for valid_* fields
+date_format = %Y-%m-%d
+
+# cat=basic/enable; type=string; label=Comma separated list of available languages (3 letters) for report files
+report_languages = ger,eng
+
+# cat=basic/enable; type=string; label=Local upload path of report files
+upload_path = /user_upload/
+
+# cat=basic/enable; type=int+; label=On which PID to save reports
+pid = 1
+
+# cat=basic/enable; type=string; label=Filter the list of reports by Agency Code
+agency =
+
+
+show {
+    # cat=Show propertys/enable; type=boolean; label=Show Type:If activated, this property is displayed in the “List view” and “Upload form”.
+    type = 1
+    # cat=Show propertys/enable; type=boolean; label=Show Agency:If activated, this property is displayed in the “List view” and “Upload form”.
+    agency = 1
+    # cat=Show propertys/enable; type=boolean; label=Show Activity:If activated, this property is displayed in the “List view” and “Upload form”.
+    activity = 1
+    # cat=Show propertys/enable; type=boolean; label=Show Activity Local Identifier:If activated, this property is displayed in the “List view” and “Upload form”.
+    activity_local_identifier = 1
+    # cat=Show propertys/enable; type=boolean; label=Show Status:If activated, this property is displayed in the “List view” and “Upload form”.
+    status = 1
+    # cat=Show propertys/enable; type=boolean; label=Show Valid To:If activated, this property is displayed in the “List view” and “Upload form”.
+    valid_to = 1
+    # cat=Show propertys/enable; type=boolean; label=Show File Report Language:If activated, this property is displayed in the “List view” and “Upload form”.
+    file_report_language = 1
+    # cat=Show propertys/enable; type=boolean; label=Show Ser Report File:If activated, this property is displayed in the “List view” and “Upload form”.
+    ser_report_file = 1
+    # cat=Show propertys/enable; type=boolean; label=Show Ser Report Name:If activated, this property is displayed in the “List view” and “Upload form”.
+    ser_report_name = 1
+    # cat=Show propertys/enable; type=boolean; label=Show Institution Deqar Id:If activated, this property is displayed in the “List view” and “Upload form”.
+    institution_deqar_id = 1
+    # cat=Show propertys/enable; type=boolean; label=Show Programme Identifier:If activated, this property is displayed in the “List view” and “Upload form”.
+    programme_identifier = 1
+    # cat=Show propertys/enable; type=boolean; label=Show Qualification Primary:If activated, this property is displayed in the “List view” and “Upload form”.
+    programme_qualification_primary = 1
+    # cat=Show propertys/enable; type=boolean; label=Show Programme NQF Level:If activated, this property is displayed in the “List view” and “Upload form”.
+    programme_nqf_level = 1
+    # cat=Show propertys/enable; type=boolean; label=Show Programme QF EHEA Level:If activated, this property is displayed in the “List view” and “Upload form”.
+    programme_qf_ehea_level = 1
+    # cat=Show propertys/enable; type=boolean; label=Show Hardcopy:If activated, this property is displayed in the “List view” and “Upload form”.
+    hardcopy = 1
+}
+
+submit {
+    # cat=Submit propertys/enable; type=boolean; label=Submit Local Identifier:If activated, this property will be transferred in the “Upload form”.
+    local_identifier = 1
+    # cat=Submit propertys/enable; type=boolean; label=Submit Activity:If activated, this property will be transferred in the “Upload form”.
+    activity = 1
+    # cat=Submit propertys/enable; type=boolean; label=Submit Activity Local Identifier:If activated, this property will be transferred in the “Upload form”.
+    activity_local_identifier = 1
+    # cat=Submit propertys/enable; type=boolean; label=Submit Valid To:If activated, this property will be transferred in the “Upload form”.
+    valid_to = 1
+    # cat=Submit propertys/enable; type=boolean; label=Submit Programme Identifier:If activated, this property will be transferred in the “Upload form”.
+    programme_identifier = 1
+    # cat=Submit propertys/enable; type=boolean; label=Submit Programme Qualification Primary:If activated, this property will be transferred in the “Upload form”.
+    programme_qualification_primary = 1
+    # cat=Submit propertys/enable; type=boolean; label=Submit Programme NQF Level:If activated, this property will be transferred in the “Upload form”.
+    programme_nqf_level = 1
+    # cat=Submit propertys/enable; type=boolean; label=Submit Programme QF EHEA Level:If activated, this property will be transferred in the “Upload form”.
+    programme_qf_ehea_level = 1
+}
+
+prefill {
+    # cat=Prefill propertys/enable; type=options[-=,institutional=1,programme=2,joint programme=3]; label=Prefill Type:Prefills the property with the given value.
+    type =
+    # cat=Prefill propertys/enable; type=string; label=Prefill Agency:Prefills the property with the given value.
+    agency =
+    # cat=Prefill propertys/enable; type=int+; label=Prefill Activity (local TYPO3 uid):Prefills the property with the given value.
+    activity =
+    # cat=Prefill propertys/enable; type=string; label=Prefill Activity Local Identifier:Prefills the property with the given value.
+    activity_local_identifier =
+    # cat=Prefill propertys/enable; type=options[-=,part of obligatory EQA system=1,voluntary=2]; label=Prefill Status:Prefills the property with the given value.
+    status =
+    # cat=Prefill propertys/enable; type=string; label=Prefill File Report Language:Prefills the property with the given value.
+    file_report_language =
+    # cat=Prefill propertys/enable; type=string; label=Prefill Institution Deqar Id:Prefills the property with the given value.
+    institution_deqar_id =
+    # cat=Prefill propertys/enable; type=string; label=Prefill Programme Name Primary:Prefills the property with the given value.
+    programme_name_primary =
+    # cat=Prefill propertys/enable; type=string; label=Prefill Programme Identifier:Prefills the property with the given value.
+    programme_identifier =
+    # cat=Prefill propertys/enable; type=string; label=Prefill Programme Qualification Primary:Prefills the property with the given value.
+    programme_qualification_primary =
+    # cat=Prefill propertys/enable; type=string; label=Prefill Programme NQF Level:Prefills the property with the given value.
+    programme_nqf_level =
+    # cat=Prefill propertys/enable; type=string; label=Prefill Programme QF EHEA Level:Prefills the property with the given value.
+    programme_qf_ehea_level =
+}
+

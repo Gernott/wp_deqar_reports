@@ -1,0 +1,14 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43 28" width="43" height="28">
+    <title>user_mod_deqar-svg</title>
+    <style>
+        tspan { white-space:pre }
+        .shp0 { fill: #0d4f87 }
+        .shp1 { fill: #2f659c }
+        .shp2 { fill: #5880b2 }
+        .shp3 { fill: #88a3ca }
+    </style>
+    <path id="Layer" class="shp0" d="M16.32 1.56L4.44 26.56L8.1 26.56L20 1.56L16.34 1.56"/>
+    <path id="Layer" class="shp1" d="M23.66 1.56L11.78 26.56L15.44 26.56L27.32 1.56L23.66 1.56"/>
+    <path id="Layer" class="shp2" d="M31 1.56L19.12 26.56L22.78 26.56L34.66 1.56L31 1.56"/>
+    <path id="Layer" class="shp3" d="M38.34 1.56L26.46 26.56L30.12 26.56L42 1.56L38.34 1.56Z"/>
+</svg>

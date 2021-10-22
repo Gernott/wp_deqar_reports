@@ -1,0 +1,613 @@
+{
+  "modules": [
+    {
+      "config": {
+        "position": [
+          603,
+          120
+        ]
+      },
+      "name": "New Model Object",
+      "value": {
+        "actionGroup": {
+          "_default0_list": true,
+          "_default1_show": true,
+          "_default2_new_create": true,
+          "_default3_edit_update": true,
+          "_default4_delete": true,
+          "customActions": []
+        },
+        "name": "Report",
+        "objectsettings": {
+          "addDeletedField": true,
+          "addHiddenField": true,
+          "addStarttimeEndtimeFields": true,
+          "aggregateRoot": true,
+          "categorizable": false,
+          "description": "",
+          "mapToTable": "",
+          "parentClass": "",
+          "skipTypeConfiguration": false,
+          "sorting": false,
+          "type": "Entity",
+          "uid": "208394955618"
+        },
+        "propertyGroup": {
+          "properties": [
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "DEQAR uid. Return value after submit",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": false,
+              "propertyName": "reportId",
+              "propertyType": "String",
+              "uid": "512703363022"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "1 = I\n2 = P\n3 = J",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": true,
+              "propertyName": "type",
+              "propertyType": "Select",
+              "uid": "991290415915"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": true,
+              "propertyName": "agency",
+              "propertyType": "String",
+              "uid": "1282381401516"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "Internal Id.\nactivity or activity_local_identifier is required",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": false,
+              "propertyName": "activityLocalIdentifier",
+              "propertyType": "String",
+              "uid": "726708697174"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "1 = part of obligatory EQA system\n2 = voluntary",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": true,
+              "propertyName": "status",
+              "propertyType": "Select",
+              "uid": "934912109745"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": true,
+              "propertyName": "validFrom",
+              "propertyType": "NativeDate",
+              "uid": "1080669654747"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": false,
+              "propertyName": "validTo",
+              "propertyType": "NativeDate",
+              "uid": "1048082167249"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "If in use, \u201chardcopy\u201d is disabled.",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": false,
+              "propertyName": "serReportFile",
+              "propertyType": "File",
+              "uid": "441897852978"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": false,
+              "propertyName": "serReportName",
+              "propertyType": "String",
+              "uid": "291538067832"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "Multiselect, 1:n relation, saved as comma list of IDs\n",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": true,
+              "propertyName": "institutionDeqarId",
+              "propertyType": "String",
+              "uid": "321706927397"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": true,
+              "propertyName": "institutionName",
+              "propertyType": "String",
+              "uid": "1025478034304"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "If active, \u201cser_report_file\u201d is disabled",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": false,
+              "propertyName": "hardcopy",
+              "propertyType": "Boolean",
+              "uid": "818615358495"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "Public path to the file",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": true,
+              "propertyName": "fileOriginalLocation",
+              "propertyType": "File",
+              "uid": "1410784957191"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": true,
+              "propertyName": "fileDisplayName",
+              "propertyType": "String",
+              "uid": "1305418942596"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "Languages from the extension setting report_languages",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": true,
+              "propertyName": "fileReportLanguage",
+              "propertyType": "Select",
+              "uid": "780098747583"
+            }
+          ]
+        },
+        "relationGroup": {
+          "relations": [
+            {
+              "foreignRelationClass": "",
+              "lazyLoading": false,
+              "propertyIsExcludeField": true,
+              "relationDescription": "DEQUAR activity Id.activity_local_identifier is required\nn:1 Relation to Activity",
+              "relationName": "activity",
+              "relationType": "manyToOne",
+              "relationWire": "[wired]",
+              "renderType": "selectSingle",
+              "uid": "1137505355259"
+            },
+            {
+              "foreignRelationClass": "",
+              "lazyLoading": false,
+              "propertyIsExcludeField": true,
+              "relationDescription": "n:1 Relation to Decision",
+              "relationName": "decision",
+              "relationType": "manyToOne",
+              "relationWire": "[wired]",
+              "renderType": "selectSingle",
+              "uid": "126107288090"
+            },
+            {
+              "foreignRelationClass": "",
+              "lazyLoading": false,
+              "propertyIsExcludeField": true,
+              "relationDescription": "IRRE Relation, can be none, one or more.",
+              "relationName": "programs",
+              "relationType": "zeroToMany",
+              "relationWire": "[wired]",
+              "renderType": "inline",
+              "uid": "1237093336806"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "config": {
+        "position": [
+          331,
+          396
+        ]
+      },
+      "name": "New Model Object",
+      "value": {
+        "actionGroup": {
+          "_default0_list": false,
+          "_default1_show": false,
+          "_default2_new_create": false,
+          "_default3_edit_update": false,
+          "_default4_delete": false,
+          "customActions": []
+        },
+        "name": "Program",
+        "objectsettings": {
+          "addDeletedField": true,
+          "addHiddenField": true,
+          "addStarttimeEndtimeFields": true,
+          "aggregateRoot": false,
+          "categorizable": false,
+          "description": "",
+          "mapToTable": "",
+          "parentClass": "",
+          "skipTypeConfiguration": false,
+          "sorting": false,
+          "type": "Entity",
+          "uid": "552793454294"
+        },
+        "propertyGroup": {
+          "properties": [
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "Local Identifiers",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": false,
+              "propertyName": "programmeIdentifier",
+              "propertyType": "Integer",
+              "uid": "627221867796"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": true,
+              "propertyName": "programmeNamePrimary",
+              "propertyType": "String",
+              "uid": "641783721547"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": false,
+              "propertyName": "programmeQualificationPrimary",
+              "propertyType": "String",
+              "uid": "1071567670584"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": false,
+              "propertyName": "programmeNqfLevel",
+              "propertyType": "String",
+              "uid": "1562834952271"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": false,
+              "propertyName": "programmeGfEheaLevel",
+              "propertyType": "Select",
+              "uid": "942835491993"
+            }
+          ]
+        },
+        "relationGroup": {
+          "relations": []
+        }
+      }
+    },
+    {
+      "config": {
+        "position": [
+          323,
+          228
+        ]
+      },
+      "name": "New Model Object",
+      "value": {
+        "actionGroup": {
+          "_default0_list": false,
+          "_default1_show": false,
+          "_default2_new_create": false,
+          "_default3_edit_update": false,
+          "_default4_delete": false,
+          "customActions": []
+        },
+        "name": "Decision",
+        "objectsettings": {
+          "addDeletedField": true,
+          "addHiddenField": true,
+          "addStarttimeEndtimeFields": true,
+          "aggregateRoot": false,
+          "categorizable": false,
+          "description": "",
+          "mapToTable": "",
+          "parentClass": "",
+          "skipTypeConfiguration": false,
+          "sorting": false,
+          "type": "Entity",
+          "uid": "1191766376781"
+        },
+        "propertyGroup": {
+          "properties": [
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "Internal name",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": true,
+              "propertyName": "title",
+              "propertyType": "String",
+              "uid": "519770567556"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "ID of the DEQAR decision",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": false,
+              "propertyName": "dequarDecision",
+              "propertyType": "Integer",
+              "uid": "150995971069"
+            }
+          ]
+        },
+        "relationGroup": {
+          "relations": []
+        }
+      }
+    },
+    {
+      "config": {
+        "position": [
+          313,
+          63
+        ]
+      },
+      "name": "New Model Object",
+      "value": {
+        "actionGroup": {
+          "_default0_list": false,
+          "_default1_show": false,
+          "_default2_new_create": false,
+          "_default3_edit_update": false,
+          "_default4_delete": false,
+          "customActions": []
+        },
+        "name": "Activity",
+        "objectsettings": {
+          "addDeletedField": true,
+          "addHiddenField": true,
+          "addStarttimeEndtimeFields": true,
+          "aggregateRoot": false,
+          "categorizable": false,
+          "description": "",
+          "mapToTable": "",
+          "parentClass": "",
+          "skipTypeConfiguration": false,
+          "sorting": false,
+          "type": "Entity",
+          "uid": "634041892375"
+        },
+        "propertyGroup": {
+          "properties": [
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "Identifier from DEQAR",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": true,
+              "propertyName": "identifier",
+              "propertyType": "Integer",
+              "uid": "862440280066"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "Name as shown on the website",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": true,
+              "propertyName": "title",
+              "propertyType": "String",
+              "uid": "962715074883"
+            }
+          ]
+        },
+        "relationGroup": {
+          "relations": []
+        }
+      }
+    },
+    {
+      "config": {
+        "position": [
+          336,
+          658
+        ]
+      },
+      "name": "New Model Object",
+      "value": {
+        "actionGroup": {
+          "_default0_list": false,
+          "_default1_show": false,
+          "_default2_new_create": false,
+          "_default3_edit_update": false,
+          "_default4_delete": false,
+          "customActions": []
+        },
+        "name": "Membership",
+        "objectsettings": {
+          "addDeletedField": true,
+          "addHiddenField": true,
+          "addStarttimeEndtimeFields": true,
+          "aggregateRoot": false,
+          "categorizable": false,
+          "description": "",
+          "mapToTable": "",
+          "parentClass": "",
+          "skipTypeConfiguration": false,
+          "sorting": false,
+          "type": "Entity",
+          "uid": "513894218342"
+        },
+        "propertyGroup": {
+          "properties": [
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "Name as shown on the website",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": true,
+              "propertyName": "title",
+              "propertyType": "String",
+              "uid": "1465513891471"
+            },
+            {
+              "allowedFileTypes": "",
+              "maxItems": "1",
+              "propertyDescription": "One or more institutions (Official Institution Name) via API",
+              "propertyIsExcludeField": true,
+              "propertyIsL10nModeExclude": false,
+              "propertyIsRequired": true,
+              "propertyName": "institutions",
+              "propertyType": "Select",
+              "uid": "177417297011"
+            }
+          ]
+        },
+        "relationGroup": {
+          "relations": []
+        }
+      }
+    }
+  ],
+  "properties": {
+    "backendModules": [
+      {
+        "actions": {
+          "controllerActionCombinations": "Report=>list"
+        },
+        "description": "",
+        "key": "deqar",
+        "mainModule": "web",
+        "name": "DEQAR",
+        "tabLabel": ""
+      }
+    ],
+    "description": "",
+    "emConf": {
+      "category": "plugin",
+      "custom_category": "",
+      "dependsOn": "typo3 => 8.7.0-8.7.99\n",
+      "disableLocalization": false,
+      "disableVersioning": false,
+      "skipGenerateDocumentationTemplate": false,
+      "sourceLanguage": "en",
+      "state": "alpha",
+      "targetVersion": "8.7.0-8.7.99",
+      "version": "1.0.0"
+    },
+    "extensionKey": "wp_deqar_reports",
+    "name": "DEQAR Report upload",
+    "originalExtensionKey": "wp_deqar_reports",
+    "originalVendorName": "WEBprofil",
+    "persons": [
+      {
+        "company": "WEBprofil",
+        "email": "office@webprofil.at",
+        "name": "WEBprofil",
+        "role": "Developer"
+      }
+    ],
+    "plugins": [],
+    "vendorName": "WEBprofil"
+  },
+  "wires": [
+    {
+      "src": {
+        "moduleId": 0,
+        "terminal": "relationWire_0",
+        "uid": "1137505355259"
+      },
+      "tgt": {
+        "moduleId": 3,
+        "terminal": "SOURCES",
+        "uid": "634041892375"
+      }
+    },
+    {
+      "src": {
+        "moduleId": 0,
+        "terminal": "relationWire_1",
+        "uid": "126107288090"
+      },
+      "tgt": {
+        "moduleId": 2,
+        "terminal": "SOURCES",
+        "uid": "1191766376781"
+      }
+    },
+    {
+      "src": {
+        "moduleId": 0,
+        "terminal": "relationWire_2",
+        "uid": "1237093336806"
+      },
+      "tgt": {
+        "moduleId": 1,
+        "terminal": "SOURCES",
+        "uid": "552793454294"
+      }
+    }
+  ],
+  "log": {
+    "last_modified": "2021-09-03 02:58",
+    "extension_builder_version": "8.10.4",
+    "be_user": " (26)"
+  }
+}

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2021-09-03T14:58:31Z"
+          product-name="wp_deqar_reports">
+        <header/>
+        <body>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report">
+                <source>Report</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.report_id">
+                <source>Report Id</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.type">
+                <source>Type</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.agency">
+                <source>Agency</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.activity_local_identifier">
+                <source>Activity Local Identifier</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.status">
+                <source>Status</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.valid_from">
+                <source>Valid From</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.valid_to">
+                <source>Valid To</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.ser_report_file">
+                <source>Ser Report File</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.ser_report_name">
+                <source>Ser Report Name</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.institution_deqar_id">
+                <source>Institution Deqar Id</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.institution_name">
+                <source>Institution Name</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.hardcopy">
+                <source>Hardcopy</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.file_original_location">
+                <source>File Original Location</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.file_display_name">
+                <source>File Display Name</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.file_report_language">
+                <source>File Report Language</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.activity">
+                <source>Activity</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.decision">
+                <source>Decision</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_report.programs">
+                <source>Programs</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_program">
+                <source>Program</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_program.programme_identifier">
+                <source>Programme Identifier</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_program.programme_name_primary">
+                <source>Programme Name Primary</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_program.programme_qualification_primary">
+                <source>Programme Qualification Primary</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_program.programme_nqf_level">
+                <source>Programme Nqf Level</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_program.programme_gf_ehea_level">
+                <source>Programme Gf Ehea Level</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_decision">
+                <source>Decision</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_decision.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_decision.dequar_decision">
+                <source>Dequar Decision</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_activity">
+                <source>Activity</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_activity.identifier">
+                <source>Identifier</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_activity.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_membership">
+                <source>Membership</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_membership.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_wpdeqarreports_domain_model_membership.institutions">
+                <source>Institutions</source>
+            </trans-unit>
+            <trans-unit id="tx_wp_deqar_reports_deqar.name">
+                <source>DEQAR Reports</source>
+            </trans-unit>
+            <trans-unit id="tx_wp_deqar_reports_deqar.description">
+                <source>Show DEQAR and TYPO3 Reports</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
