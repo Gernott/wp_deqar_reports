@@ -17,7 +17,6 @@
     }
   },
   "replace": {
-    "wp_deqar_reports": "self.version",
     "typo3-ter/wp-deqar-reports": "self.version"
   }
 }
