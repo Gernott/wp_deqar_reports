@@ -22,6 +22,6 @@
     }
   },
   "replace": {
-    "wp-deqar-reports": "self.version"
+    "webprofil/wp-deqar-reports": "self.version"
   }
 }
