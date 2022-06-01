@@ -1,8 +1,8 @@
 # cat=basic/enable; type=string; label=DEQAR API Token
-authorization_token =
+authorization_token = 1eb9bcf4c44377568d4b51022f63387b3e7462c5
 
 # cat=basic/enable; type=string; label=DEQAR API URL:Can be a sandbox URL too
-report_submission_endpoint =
+report_submission_endpoint = https://backend.sandbox.deqar.eu
 
 # cat=basic/enable; type=string; label=Date format for valid_* fields
 date_format = %Y-%m-%d

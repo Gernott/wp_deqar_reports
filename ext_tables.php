@@ -1,5 +1,5 @@
 <?php
-defined('TYPO3_MODE') || die('Access denied.');
+defined('TYPO3') || die('Access denied.');
 
 call_user_func(
     function () {
@@ -7,12 +7,12 @@ call_user_func(
         if (TYPO3_MODE === 'BE') {
 
             \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-                'WEBprofil.WpDeqarReports',
+                'WpDeqarReports',
                 'web', // Make module a submodule of 'web'
                 'deqar', // Submodule key
                 '', // Position
                 [
-                    'Report' => 'list,new,create,edit,update,error',
+                    \WEBprofil\WpDeqarReports\Controller\ReportController::class => 'list,new,create,edit,update,error',
 
                 ],
                 [

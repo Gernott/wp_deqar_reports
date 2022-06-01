@@ -17,13 +17,10 @@ $EM_CONF[$_EXTKEY] = [
     'author' => 'WEBprofil',
     'author_email' => 'office@webprofil.at',
     'state' => 'alpha',
-    'uploadfolder' => 1,
-    'createDirs' => '',
-    'clearCacheOnLoad' => 0,
-    'version' => '1.0.0',
+    'version' => '2.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '8.7.0-8.7.99',
+            'typo3' => '11.5.0-11.5.99',
         ],
         'conflicts' => [],
         'suggests' => [],

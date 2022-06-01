@@ -1,6 +1,8 @@
 <?php
 namespace WEBprofil\WpDeqarReports\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /***
  *
  * This file is part of the "DEQAR Report upload" Extension for TYPO3 CMS.
@@ -11,17 +13,16 @@ namespace WEBprofil\WpDeqarReports\Domain\Model;
  *  (c) 2021 WEBprofil <office@webprofil.at>, WEBprofil
  *
  ***/
-
 /**
  * Activity
  */
-class Activity extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Activity extends AbstractEntity
 {
     /**
      * Identifier from DEQAR
      *
      * @var int
-     * @validate NotEmpty
+     * @Extbase\Validate("NotEmpty")
      */
     protected $identifier = 0;
 
@@ -29,7 +30,7 @@ class Activity extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Name as shown on the website
      *
      * @var string
-     * @validate NotEmpty
+     * @Extbase\Validate("NotEmpty")
      */
     protected $title = '';
 

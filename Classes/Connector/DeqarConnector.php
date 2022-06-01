@@ -2,6 +2,8 @@
 
 namespace WEBprofil\WpDeqarReports\Connector;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\SingletonInterface;
 use WEBprofil\WpDeqarReports\Domain\Model\Program;
 use WEBprofil\WpDeqarReports\Domain\Model\Report;
@@ -55,6 +57,7 @@ class DeqarConnector implements SingletonInterface
                     $url = sprintf("%s?%s", $url, http_build_query($data));
                 }
         }
+
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -67,6 +70,7 @@ class DeqarConnector implements SingletonInterface
                 exit;
             }
         }
+
         curl_close($curl);
         return $resultData;
     }
@@ -74,7 +78,7 @@ class DeqarConnector implements SingletonInterface
     private function getSettings(): array
     {
         $cleanSettings = [];
-        $settings = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['wp_deqar_reports']);
+        $settings = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('wp_deqar_reports');
         foreach ($settings as $key => $setting) {
             $key = str_replace('.', '', $key);
             $cleanSettings[$key] = $setting;

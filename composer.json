@@ -1,10 +1,10 @@
 {
   "name": "webprofil/wp-deqar-reports",
+  "description": "Add description...",
+  "license": "GPL-2.0-or-later",
   "type": "typo3-cms-extension",
-  "description": "",
-  "authors": [],
   "require": {
-    "typo3/cms-core": "^8.7.1"
+    "typo3/cms-core": "^11.5"
   },
   "autoload": {
     "psr-4": {
@@ -16,7 +16,13 @@
       "WEBprofil\\WpDeqarReports\\Tests\\": "Tests"
     }
   },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "wp_deqar_reports"
+    }
+  },
   "replace": {
-    "typo3-ter/wp-deqar-reports": "self.version"
+    "typo3-ter/wp-deqar-reports": "self.version",
+    "wp_deqar_reports": "self.version"
   }
 }

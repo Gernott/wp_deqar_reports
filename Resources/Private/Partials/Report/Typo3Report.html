@@ -2,17 +2,17 @@
 <tr data-uid="{report.uid}" id="report-{report.uid}">
     <f:if condition="{settings.show.type}">
         <td nowrap="nowrap" class="col-icon" title="{f:translate(id: 'report_type_{report.type}')}">
-            <f:image src="EXT:wp_deqar_reports/Resources/Public/Icons/report_type_{report.type}.svg"/>
+            <f:image src="EXT:wp_deqar_reports/Resources/Public/Icons/report_type_{report.type}.svg" width="30"/>
         </td>
     </f:if>
     <td nowrap="nowrap" class="col-icon">
         <f:link.action action="edit" arguments="{report:report}">
             <f:if condition="{report.uid}">
-                <f:image src="EXT:wp_deqar_reports/Resources/Public/Icons/typo3.svg" title="TYPO3: {report.uid}"/>
+                <f:image src="EXT:wp_deqar_reports/Resources/Public/Icons/typo3.svg" title="TYPO3: {report.uid}" width="30"/>
             </f:if>
         </f:link.action>
         <f:if condition="{report.reportId}">
-            <f:image src="EXT:wp_deqar_reports/Resources/Public/Icons/deqar.svg" title="Deqar: {report.reportId}"/>
+            <f:image src="EXT:wp_deqar_reports/Resources/Public/Icons/deqar.svg" title="Deqar: {report.reportId}" width="30"/>
         </f:if>
     </td>
     <f:if condition="{settings.show.agency}">

@@ -6,34 +6,3 @@ config.tx_extbase {
     }
 }
 
-lib.institutions = USER_INT
-lib.institutions {
-    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-    extensionName = WpDeqarReports
-    pluginName = Deqar
-    vendorName = WEBprofil
-    switchableControllerActions.Report.1 = getInstitutions
-    action = getInstitutions
-    controller = Report
-}
-
-ajax_institutions = PAGE
-ajax_institutions {
-    typeNum = 123
-    config {
-        disableAllHeaderCode = 1
-        xhtml_cleaning = 0
-        admPanel = 0
-        additionalHeaders {
-            10 {
-                header = Content-Type: application/json
-                replace = 1
-            }
-        }
-
-        no_cache = 1
-        debug = 0
-    }
-
-    10 < lib.institutions
-}

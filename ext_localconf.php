@@ -1,29 +1,29 @@
 <?php
-defined('TYPO3_MODE') || die('Access denied.');
+defined('TYPO3') || die('Access denied.');
 
 call_user_func(
     function () {
 
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-            'WEBprofil.WpDeqarReports',
+            'WpDeqarReports',
             'Deqar',
             [
-                'Report' => 'getInstitutions'
+                \WEBprofil\WpDeqarReports\Controller\ReportController::class => 'getInstitutions'
             ],
             // non-cacheable actions
             [
-                'Report' => 'getInstitutions'
+                \WEBprofil\WpDeqarReports\Controller\ReportController::class => 'getInstitutions'
             ]
         );
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-            'WEBprofil.WpDeqarReports',
+            'WpDeqarReports',
             'Deqarreports',
             [
-                'Report' => 'plugin'
+                \WEBprofil\WpDeqarReports\Controller\ReportController::class => 'plugin'
             ],
             // non-cacheable actions
             [
-                'Report' => ''
+                \WEBprofil\WpDeqarReports\Controller\ReportController::class => ''
             ]
         );
 

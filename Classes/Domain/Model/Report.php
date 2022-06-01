@@ -1,6 +1,9 @@
 <?php
 namespace WEBprofil\WpDeqarReports\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /***
  *
  * This file is part of the "DEQAR Report upload" Extension for TYPO3 CMS.
@@ -11,11 +14,10 @@ namespace WEBprofil\WpDeqarReports\Domain\Model;
  *  (c) 2021 WEBprofil <office@webprofil.at>, WEBprofil
  *
  ***/
-
 /**
  * Report
  */
-class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Report extends AbstractEntity
 {
     /**
      * DEQAR uid. Return value after submit
@@ -30,7 +32,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * 3 = J
      *
      * @var int
-     * @validate NotEmpty
+     * @Extbase\Validate("NotEmpty")
      */
     protected $type = 0;
 
@@ -74,8 +76,8 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * If in use, “hardcopy” is disabled.
      *
-     * @var \WEBprofil\WpDeqarReports\Domain\Model\FileReference
-     * @cascade remove
+     * @var FileReference
+     * @Extbase\ORM\Cascade("remove")
      */
     protected $serReportFile = null;
 
@@ -111,8 +113,8 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Public path to the file
      *
-     * @var \WEBprofil\WpDeqarReports\Domain\Model\FileReference
-     * @cascade remove
+     * @var FileReference
+     * @Extbase\ORM\Cascade("remove")
      */
     protected $fileOriginalLocation = null;
 
@@ -134,22 +136,22 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * DEQUAR activity Id.activity_local_identifier is required
      * n:1 Relation to Activity
      *
-     * @var \WEBprofil\WpDeqarReports\Domain\Model\Activity
+     * @var Activity
      */
     protected $activity = null;
 
     /**
      * n:1 Relation to Decision
      *
-     * @var \WEBprofil\WpDeqarReports\Domain\Model\Decision
+     * @var Decision
      */
     protected $decision = null;
 
     /**
      * IRRE Relation, can be none, one or more.
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\WEBprofil\WpDeqarReports\Domain\Model\Program>
-     * @cascade remove
+     * @var ObjectStorage<Program>
+     * @Extbase\ORM\Cascade("remove")
      */
     protected $programs = null;
 
@@ -308,7 +310,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the serReportFile
      *
-     * @return \WEBprofil\WpDeqarReports\Domain\Model\FileReference $serReportFile
+     * @return FileReference $serReportFile
      */
     public function getSerReportFile()
     {
@@ -318,10 +320,10 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the serReportFile
      *
-     * @param \WEBprofil\WpDeqarReports\Domain\Model\FileReference $serReportFile
+     * @param FileReference $serReportFile
      * @return void
      */
-    public function setSerReportFile(\WEBprofil\WpDeqarReports\Domain\Model\FileReference $serReportFile = null)
+    public function setSerReportFile(FileReference $serReportFile = null)
     {
         $this->serReportFile = $serReportFile;
     }
@@ -423,7 +425,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the fileOriginalLocation
      *
-     * @return \WEBprofil\WpDeqarReports\Domain\Model\FileReference $fileOriginalLocation
+     * @return FileReference $fileOriginalLocation
      */
     public function getFileOriginalLocation()
     {
@@ -433,10 +435,10 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the fileOriginalLocation
      *
-     * @param \WEBprofil\WpDeqarReports\Domain\Model\FileReference $fileOriginalLocationF
+     * @param FileReference $fileOriginalLocationF
      * @return void
      */
-    public function setFileOriginalLocation(\WEBprofil\WpDeqarReports\Domain\Model\FileReference $fileOriginalLocation)
+    public function setFileOriginalLocation(FileReference $fileOriginalLocation)
     {
         $this->fileOriginalLocation = $fileOriginalLocation;
     }
@@ -502,13 +504,13 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected function initStorageObjects()
     {
-        $this->programs = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->programs = new ObjectStorage();
     }
 
     /**
      * Returns the activity
      *
-     * @return \WEBprofil\WpDeqarReports\Domain\Model\Activity $activity
+     * @return Activity $activity
      */
     public function getActivity()
     {
@@ -518,10 +520,10 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the activity
      *
-     * @param \WEBprofil\WpDeqarReports\Domain\Model\Activity $activity
+     * @param Activity $activity
      * @return void
      */
-    public function setActivity(\WEBprofil\WpDeqarReports\Domain\Model\Activity $activity)
+    public function setActivity(Activity $activity)
     {
         $this->activity = $activity;
     }
@@ -529,7 +531,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the decision
      *
-     * @return \WEBprofil\WpDeqarReports\Domain\Model\Decision $decision
+     * @return Decision $decision
      */
     public function getDecision()
     {
@@ -539,10 +541,10 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the decision
      *
-     * @param \WEBprofil\WpDeqarReports\Domain\Model\Decision $decision
+     * @param Decision $decision
      * @return void
      */
-    public function setDecision(\WEBprofil\WpDeqarReports\Domain\Model\Decision $decision)
+    public function setDecision(Decision $decision)
     {
         $this->decision = $decision;
     }
@@ -550,10 +552,10 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Adds a Program
      *
-     * @param \WEBprofil\WpDeqarReports\Domain\Model\Program $program
+     * @param Program $program
      * @return void
      */
-    public function addProgram(\WEBprofil\WpDeqarReports\Domain\Model\Program $program)
+    public function addProgram(Program $program)
     {
         $this->programs->attach($program);
     }
@@ -561,10 +563,10 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Removes a Program
      *
-     * @param \WEBprofil\WpDeqarReports\Domain\Model\Program $programToRemove The Program to be removed
+     * @param Program $programToRemove The Program to be removed
      * @return void
      */
-    public function removeProgram(\WEBprofil\WpDeqarReports\Domain\Model\Program $programToRemove)
+    public function removeProgram(Program $programToRemove)
     {
         $this->programs->detach($programToRemove);
     }
@@ -572,7 +574,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the programs
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\WEBprofil\WpDeqarReports\Domain\Model\Program> $programs
+     * @return ObjectStorage<Program> $programs
      */
     public function getPrograms()
     {
@@ -582,10 +584,10 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the programs
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\WEBprofil\WpDeqarReports\Domain\Model\Program> $programs
+     * @param ObjectStorage<Program> $programs
      * @return void
      */
-    public function setPrograms(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $programs)
+    public function setPrograms(ObjectStorage $programs)
     {
         $this->programs = $programs;
     }

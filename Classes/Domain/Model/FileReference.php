@@ -2,6 +2,9 @@
 
 namespace WEBprofil\WpDeqarReports\Domain\Model;
 
+use TYPO3\CMS\Core\Resource\ResourceInterface;
+use TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Extbase\Domain\Model\AbstractFileFolder;
 
@@ -17,9 +20,9 @@ class FileReference extends AbstractFileFolder
     protected $uidLocal;
 
     /**
-     * @param \TYPO3\CMS\Core\Resource\ResourceInterface $originalResource
+     * @param ResourceInterface $originalResource
      */
-    public function setOriginalResource(\TYPO3\CMS\Core\Resource\ResourceInterface $originalResource)
+    public function setOriginalResource(ResourceInterface $originalResource)
     {
         $this->originalResource = $originalResource;
         $this->uidLocal = (int)$originalResource->getUid();
@@ -27,12 +30,12 @@ class FileReference extends AbstractFileFolder
 
     /**
      * @return \TYPO3\CMS\Core\Resource\FileReference
-     * @throws \TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException
+     * @throws ResourceDoesNotExistException
      */
     public function getOriginalResource()
     {
         if ($this->originalResource === null) {
-            $this->originalResource = ResourceFactory::getInstance()->getFileReferenceObject($this->getUid());
+            $this->originalResource = GeneralUtility::makeInstance(ResourceFactory::class)->getFileReferenceObject($this->getUid());
         }
 
         return $this->originalResource;

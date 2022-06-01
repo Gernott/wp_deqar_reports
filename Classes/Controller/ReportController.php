@@ -1,6 +1,14 @@
 <?php
 namespace WEBprofil\WpDeqarReports\Controller;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use WEBprofil\WpDeqarReports\Domain\Repository\ActivityRepository;
+use WEBprofil\WpDeqarReports\Domain\Repository\DecisionRepository;
+use WEBprofil\WpDeqarReports\Connector\DeqarConnector;
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Resource\Exception\ExistingTargetFileNameException;
+use TYPO3\CMS\Core\Resource\Exception\InsufficientFolderAccessPermissionsException;
 use RuntimeException;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -34,30 +42,26 @@ class ReportController extends ActionController
     /**
      * reportRepository
      *
-     * @var \WEBprofil\WpDeqarReports\Domain\Repository\ReportRepository
-     * @inject
+     * @var ReportRepository
      */
     protected $reportRepository = null;
 
     /**
      * activityRepository
      *
-     * @var \WEBprofil\WpDeqarReports\Domain\Repository\ActivityRepository
-     * @inject
+     * @var ActivityRepository
      */
     protected $activityRepository = null;
 
     /**
      * decisionRepository
      *
-     * @var \WEBprofil\WpDeqarReports\Domain\Repository\DecisionRepository
-     * @inject
+     * @var DecisionRepository
      */
     protected $decisionRepository = null;
 
     /**
-     * @var \WEBprofil\WpDeqarReports\Connector\DeqarConnector
-     * @inject
+     * @var DeqarConnector
      */
     protected $decarConnector = null;
 
@@ -66,11 +70,12 @@ class ReportController extends ActionController
      *
      * @return void
      */
-    public function listAction(): void
+    public function listAction(): ResponseInterface
     {
         $arguments = $this->request->getArguments();
 
         $typo3Reports = $this->reportRepository->findAll()->toArray();
+
         $reports = $this->decarConnector->getReports($typo3Reports, $arguments['year']);
         $years = $this->getYearsToFilter($typo3Reports);
 
@@ -78,6 +83,7 @@ class ReportController extends ActionController
         $this->view->assign('year', $arguments['year']);
         $this->view->assign('reports', $reports);
         $this->view->assign('settings', $this->getSettings());
+        return $this->htmlResponse();
     }
 
     /**
@@ -86,10 +92,11 @@ class ReportController extends ActionController
      * @param Report $report
      * @return void
      */
-    public function showAction(Report $report): void
+    public function showAction(Report $report): ResponseInterface
     {
         $this->view->assign('report', $report);
-        $this->view->assign('settings', unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['wp_deqar_reports']));
+        $this->view->assign('settings', GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('wp_deqar_reports'));
+        return $this->htmlResponse();
     }
 
     /**
@@ -97,7 +104,7 @@ class ReportController extends ActionController
      *
      * @return false|string|void
      */
-    public function getInstitutionsAction()
+    public function getInstitutionsAction(): ResponseInterface
     {
         $select2Results = [];
         $institutions = $this->decarConnector->getInstitutions($_REQUEST['search']);
@@ -106,7 +113,7 @@ class ReportController extends ActionController
             $select2Result['text'] = $result['name_primary'] . ' (' . $result['deqar_id'] . ')';
             $select2Results['results'][] = $select2Result;
         }
-        return json_encode($select2Results);
+        return $this->jsonResponse(json_encode($select2Results));
     }
 
     /**
@@ -114,7 +121,7 @@ class ReportController extends ActionController
      *
      * @return void
      */
-    public function newAction(): void
+    public function newAction(): ResponseInterface
     {
         $activities = $this->activityRepository->findAll();
         $decisions = $this->decisionRepository->findAll();
@@ -124,6 +131,7 @@ class ReportController extends ActionController
         $this->view->assign('activities', $activities);
         $this->view->assign('decisions', $decisions);
         $this->view->assign('languages', $languages);
+        return $this->htmlResponse();
     }
 
     /**
@@ -134,8 +142,8 @@ class ReportController extends ActionController
      * @throws IllegalObjectTypeException
      * @throws StopActionException
      * @throws UnsupportedRequestTypeException
-     * @throws \TYPO3\CMS\Core\Resource\Exception\ExistingTargetFileNameException
-     * @throws \TYPO3\CMS\Core\Resource\Exception\InsufficientFolderAccessPermissionsException
+     * @throws ExistingTargetFileNameException
+     * @throws InsufficientFolderAccessPermissionsException
      */
     public function createAction(Report $newReport): void
     {
@@ -222,10 +230,10 @@ class ReportController extends ActionController
      * action edit
      *
      * @param Report $report
-     * @ignorevalidation $report
      * @return void
+     * @Extbase\IgnoreValidation("report")
      */
-    public function editAction(Report $report): void
+    public function editAction(Report $report): ResponseInterface
     {
         $activities = $this->activityRepository->findAll();
         $decisions = $this->decisionRepository->findAll();
@@ -237,6 +245,7 @@ class ReportController extends ActionController
         $this->view->assign('languages', $languages);
         $this->view->assign('report', $report);
         $this->view->assign('edit', true);
+        return $this->htmlResponse();
     }
 
     /**
@@ -277,7 +286,7 @@ class ReportController extends ActionController
     private function getSettings(): array
     {
         $cleanSettings = [];
-        $settings = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['wp_deqar_reports']);
+        $settings = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('wp_deqar_reports');
         foreach ($settings as $key => $setting) {
             $key = str_replace('.', '', $key);
             $cleanSettings[$key] = $setting;
@@ -290,8 +299,8 @@ class ReportController extends ActionController
      *
      * @param $fileData
      * @param $folder
-     * @throws \TYPO3\CMS\Core\Resource\Exception\ExistingTargetFileNameException
-     * @throws \TYPO3\CMS\Core\Resource\Exception\InsufficientFolderAccessPermissionsException
+     * @throws ExistingTargetFileNameException
+     * @throws InsufficientFolderAccessPermissionsException
      */
     private function uploadFalFile($fileData, $folder)
     {
@@ -415,7 +424,7 @@ class ReportController extends ActionController
      *
      * @return void
      */
-    public function pluginAction(): void
+    public function pluginAction(): ResponseInterface
     {
         $arguments = $this->request->getArguments();
         $typo3Reports = $this->reportRepository->findAll()->toArray();
@@ -465,5 +474,26 @@ class ReportController extends ActionController
         $this->view->assign('reports', $reports);
         $this->view->assign('institutionReports', $institutionReports);
         $this->view->assign('settings', $this->getSettings());
+        return $this->htmlResponse();
+    }
+
+    public function injectReportRepository(ReportRepository $reportRepository): void
+    {
+        $this->reportRepository = $reportRepository;
+    }
+
+    public function injectActivityRepository(ActivityRepository $activityRepository): void
+    {
+        $this->activityRepository = $activityRepository;
+    }
+
+    public function injectDecisionRepository(DecisionRepository $decisionRepository): void
+    {
+        $this->decisionRepository = $decisionRepository;
+    }
+
+    public function injectDecarConnector(DeqarConnector $decarConnector): void
+    {
+        $this->decarConnector = $decarConnector;
     }
 }
