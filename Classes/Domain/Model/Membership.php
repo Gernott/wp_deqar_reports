@@ -22,16 +22,16 @@ class Membership extends AbstractEntity
      * Name as shown on the website
      *
      * @var string
-     * @Extbase\Validate("NotEmpty")
      */
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
     protected $title = '';
 
     /**
      * One or more institutions (Official Institution Name) via API
      *
      * @var int
-     * @Extbase\Validate("NotEmpty")
      */
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
     protected $institutions = 0;
 
     /**
@@ -50,7 +50,7 @@ class Membership extends AbstractEntity
      * @param string $title
      * @return void
      */
-    public function setTitle($title)
+    public function setTitle($title): void
     {
         $this->title = $title;
     }
@@ -71,7 +71,7 @@ class Membership extends AbstractEntity
      * @param int $institutions
      * @return void
      */
-    public function setInstitutions($institutions)
+    public function setInstitutions($institutions): void
     {
         $this->institutions = $institutions;
     }

@@ -32,8 +32,8 @@ class Report extends AbstractEntity
      * 3 = J
      *
      * @var int
-     * @Extbase\Validate("NotEmpty")
      */
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
     protected $type = 0;
 
     /**
@@ -77,8 +77,8 @@ class Report extends AbstractEntity
      * If in use, “hardcopy” is disabled.
      *
      * @var FileReference
-     * @Extbase\ORM\Cascade("remove")
      */
+    #[Extbase\ORM\Cascade(['value' => 'remove'])]
     protected $serReportFile = null;
 
     /**
@@ -114,8 +114,8 @@ class Report extends AbstractEntity
      * Public path to the file
      *
      * @var FileReference
-     * @Extbase\ORM\Cascade("remove")
      */
+    #[Extbase\ORM\Cascade(['value' => 'remove'])]
     protected $fileOriginalLocation = null;
 
     /**
@@ -151,8 +151,8 @@ class Report extends AbstractEntity
      * IRRE Relation, can be none, one or more.
      *
      * @var ObjectStorage<Program>
-     * @Extbase\ORM\Cascade("remove")
      */
+    #[Extbase\ORM\Cascade(['value' => 'remove'])]
     protected $programs = null;
 
     /**
@@ -176,7 +176,7 @@ class Report extends AbstractEntity
      * @param string $reportId
      * @return void
      */
-    public function setReportId($reportId)
+    public function setReportId($reportId): void
     {
         $this->reportId = $reportId;
     }
@@ -197,7 +197,7 @@ class Report extends AbstractEntity
      * @param int $type
      * @return void
      */
-    public function setType($type)
+    public function setType($type): void
     {
         $this->type = $type;
     }
@@ -218,7 +218,7 @@ class Report extends AbstractEntity
      * @param string $agency
      * @return void
      */
-    public function setAgency($agency)
+    public function setAgency($agency): void
     {
         $this->agency = $agency;
     }
@@ -239,7 +239,7 @@ class Report extends AbstractEntity
      * @param string $activityLocalIdentifier
      * @return void
      */
-    public function setActivityLocalIdentifier($activityLocalIdentifier)
+    public function setActivityLocalIdentifier($activityLocalIdentifier): void
     {
         $this->activityLocalIdentifier = $activityLocalIdentifier;
     }
@@ -260,7 +260,7 @@ class Report extends AbstractEntity
      * @param int $status
      * @return void
      */
-    public function setStatus($status)
+    public function setStatus($status): void
     {
         $this->status = $status;
     }
@@ -278,10 +278,9 @@ class Report extends AbstractEntity
     /**
      * Sets the validFrom
      *
-     * @param \DateTime $validFrom
      * @return void
      */
-    public function setValidFrom(\DateTime $validFrom = null)
+    public function setValidFrom(\DateTime $validFrom = null): void
     {
         $this->validFrom = $validFrom;
     }
@@ -299,10 +298,9 @@ class Report extends AbstractEntity
     /**
      * Sets the validTo
      *
-     * @param \DateTime $validTo
      * @return void
      */
-    public function setValidTo(\DateTime $validTo = null)
+    public function setValidTo(\DateTime $validTo = null): void
     {
         $this->validTo = $validTo;
     }
@@ -320,10 +318,9 @@ class Report extends AbstractEntity
     /**
      * Sets the serReportFile
      *
-     * @param FileReference $serReportFile
      * @return void
      */
-    public function setSerReportFile(FileReference $serReportFile = null)
+    public function setSerReportFile(FileReference $serReportFile = null): void
     {
         $this->serReportFile = $serReportFile;
     }
@@ -344,7 +341,7 @@ class Report extends AbstractEntity
      * @param string $serReportName
      * @return void
      */
-    public function setSerReportName($serReportName)
+    public function setSerReportName($serReportName): void
     {
         $this->serReportName = $serReportName;
     }
@@ -365,7 +362,7 @@ class Report extends AbstractEntity
      * @param string $institutionDeqarId
      * @return void
      */
-    public function setInstitutionDeqarId($institutionDeqarId)
+    public function setInstitutionDeqarId($institutionDeqarId): void
     {
         $this->institutionDeqarId = $institutionDeqarId;
     }
@@ -386,7 +383,7 @@ class Report extends AbstractEntity
      * @param string $institutionName
      * @return void
      */
-    public function setInstitutionName($institutionName)
+    public function setInstitutionName($institutionName): void
     {
         $this->institutionName = $institutionName;
     }
@@ -407,7 +404,7 @@ class Report extends AbstractEntity
      * @param bool $hardcopy
      * @return void
      */
-    public function setHardcopy($hardcopy)
+    public function setHardcopy($hardcopy): void
     {
         $this->hardcopy = $hardcopy;
     }
@@ -438,7 +435,7 @@ class Report extends AbstractEntity
      * @param FileReference $fileOriginalLocationF
      * @return void
      */
-    public function setFileOriginalLocation(FileReference $fileOriginalLocation)
+    public function setFileOriginalLocation(FileReference $fileOriginalLocation): void
     {
         $this->fileOriginalLocation = $fileOriginalLocation;
     }
@@ -459,7 +456,7 @@ class Report extends AbstractEntity
      * @param string $fileDisplayName
      * @return void
      */
-    public function setFileDisplayName($fileDisplayName)
+    public function setFileDisplayName($fileDisplayName): void
     {
         $this->fileDisplayName = $fileDisplayName;
     }
@@ -480,7 +477,7 @@ class Report extends AbstractEntity
      * @param string $fileReportLanguage
      * @return void
      */
-    public function setFileReportLanguage($fileReportLanguage)
+    public function setFileReportLanguage($fileReportLanguage): void
     {
         $this->fileReportLanguage = $fileReportLanguage;
     }
@@ -520,10 +517,9 @@ class Report extends AbstractEntity
     /**
      * Sets the activity
      *
-     * @param Activity $activity
      * @return void
      */
-    public function setActivity(Activity $activity)
+    public function setActivity(Activity $activity): void
     {
         $this->activity = $activity;
     }
@@ -541,10 +537,9 @@ class Report extends AbstractEntity
     /**
      * Sets the decision
      *
-     * @param Decision $decision
      * @return void
      */
-    public function setDecision(Decision $decision)
+    public function setDecision(Decision $decision): void
     {
         $this->decision = $decision;
     }
@@ -552,10 +547,9 @@ class Report extends AbstractEntity
     /**
      * Adds a Program
      *
-     * @param Program $program
      * @return void
      */
-    public function addProgram(Program $program)
+    public function addProgram(Program $program): void
     {
         $this->programs->attach($program);
     }
@@ -566,7 +560,7 @@ class Report extends AbstractEntity
      * @param Program $programToRemove The Program to be removed
      * @return void
      */
-    public function removeProgram(Program $programToRemove)
+    public function removeProgram(Program $programToRemove): void
     {
         $this->programs->detach($programToRemove);
     }
@@ -587,7 +581,7 @@ class Report extends AbstractEntity
      * @param ObjectStorage<Program> $programs
      * @return void
      */
-    public function setPrograms(ObjectStorage $programs)
+    public function setPrograms(ObjectStorage $programs): void
     {
         $this->programs = $programs;
     }

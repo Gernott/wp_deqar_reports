@@ -29,11 +29,9 @@ class DeqarConnector implements SingletonInterface
 
     /**
      * @param $path
-     * @param array $data
-     * @param string $method
-     * @return array|bool
+     * @return mixed
      */
-    public function request($path, array $data = [], string $method = 'GET')
+    public function request($path, array $data = [], string $method = 'GET'): mixed
     {
         $curl = curl_init();
         $url = $this->url . $path;
@@ -80,7 +78,7 @@ class DeqarConnector implements SingletonInterface
         $cleanSettings = [];
         $settings = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('wp_deqar_reports');
         foreach ($settings as $key => $setting) {
-            $key = str_replace('.', '', $key);
+            $key = str_replace('.', '', (string) $key);
             $cleanSettings[$key] = $setting;
         }
         return $cleanSettings;
@@ -91,7 +89,7 @@ class DeqarConnector implements SingletonInterface
         return $this->request('/webapi/v2/browse/institutions/', ['limit' => 3000, 'query' => $query]);
     }
 
-    public function getReports(array $typo3Reports, $year = null)
+    public function getReports(array $typo3Reports, $year = null): array
     {
 
         $settings = $this->getSettings();
@@ -154,7 +152,7 @@ class DeqarConnector implements SingletonInterface
             ],
         ];
 
-        foreach (explode(',', $report->getInstitutionDeqarId()) as $deqarId) {
+        foreach (explode(',', (string) $report->getInstitutionDeqarId()) as $deqarId) {
             $data['institutions'][] = [
                 'deqar_id' => $deqarId
             ];

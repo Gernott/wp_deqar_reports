@@ -22,16 +22,16 @@ class Activity extends AbstractEntity
      * Identifier from DEQAR
      *
      * @var int
-     * @Extbase\Validate("NotEmpty")
      */
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
     protected $identifier = 0;
 
     /**
      * Name as shown on the website
      *
      * @var string
-     * @Extbase\Validate("NotEmpty")
      */
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
     protected $title = '';
 
     /**
@@ -50,7 +50,7 @@ class Activity extends AbstractEntity
      * @param int $identifier
      * @return void
      */
-    public function setIdentifier($identifier)
+    public function setIdentifier($identifier): void
     {
         $this->identifier = $identifier;
     }
@@ -71,7 +71,7 @@ class Activity extends AbstractEntity
      * @param string $title
      * @return void
      */
-    public function setTitle($title)
+    public function setTitle($title): void
     {
         $this->title = $title;
     }

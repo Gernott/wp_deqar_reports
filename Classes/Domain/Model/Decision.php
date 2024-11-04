@@ -22,8 +22,8 @@ class Decision extends AbstractEntity
      * Internal name
      *
      * @var string
-     * @Extbase\Validate("NotEmpty")
      */
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
     protected $title = '';
 
     /**
@@ -49,7 +49,7 @@ class Decision extends AbstractEntity
      * @param string $title
      * @return void
      */
-    public function setTitle($title)
+    public function setTitle($title): void
     {
         $this->title = $title;
     }
@@ -70,7 +70,7 @@ class Decision extends AbstractEntity
      * @param int $dequarDecision
      * @return void
      */
-    public function setDequarDecision($dequarDecision)
+    public function setDequarDecision($dequarDecision): void
     {
         $this->dequarDecision = $dequarDecision;
     }

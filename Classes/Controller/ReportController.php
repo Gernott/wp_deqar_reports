@@ -1,6 +1,7 @@
 <?php
 namespace WEBprofil\WpDeqarReports\Controller;
 
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use WEBprofil\WpDeqarReports\Domain\Repository\ActivityRepository;
 use WEBprofil\WpDeqarReports\Domain\Repository\DecisionRepository;
@@ -10,11 +11,8 @@ use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Resource\Exception\ExistingTargetFileNameException;
 use TYPO3\CMS\Core\Resource\Exception\InsufficientFolderAccessPermissionsException;
 use RuntimeException;
-use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
-use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 use WEBprofil\WpDeqarReports\Domain\Model\FileReference;
@@ -39,31 +37,14 @@ use TYPO3\CMS\Core\Resource\StorageRepository;
  */
 class ReportController extends ActionController
 {
-    /**
-     * reportRepository
-     *
-     * @var ReportRepository
-     */
-    protected $reportRepository = null;
-
-    /**
-     * activityRepository
-     *
-     * @var ActivityRepository
-     */
-    protected $activityRepository = null;
-
-    /**
-     * decisionRepository
-     *
-     * @var DecisionRepository
-     */
-    protected $decisionRepository = null;
-
-    /**
-     * @var DeqarConnector
-     */
-    protected $decarConnector = null;
+    public function __construct(
+        protected ReportRepository $reportRepository,
+        protected ActivityRepository $activityRepository,
+        protected DecisionRepository $decisionRepository,
+        protected DeqarConnector $decarConnector)
+    {
+        parent::__construct();
+    }
 
     /**
      * action list
@@ -89,7 +70,6 @@ class ReportController extends ActionController
     /**
      * action show
      *
-     * @param Report $report
      * @return void
      */
     public function showAction(Report $report): ResponseInterface
@@ -113,7 +93,7 @@ class ReportController extends ActionController
             $select2Result['text'] = $result['name_primary'] . ' (' . $result['deqar_id'] . ')';
             $select2Results['results'][] = $select2Result;
         }
-        return $this->jsonResponse(json_encode($select2Results));
+        return $this->jsonResponse(json_encode($select2Results, JSON_THROW_ON_ERROR));
     }
 
     /**
@@ -137,15 +117,11 @@ class ReportController extends ActionController
     /**
      * action create
      *
-     * @param Report $newReport
-     * @return void
+     * @return ResponseInterface
      * @throws IllegalObjectTypeException
-     * @throws StopActionException
-     * @throws UnsupportedRequestTypeException
      * @throws ExistingTargetFileNameException
-     * @throws InsufficientFolderAccessPermissionsException
      */
-    public function createAction(Report $newReport): void
+    public function createAction(Report $newReport): ResponseInterface
     {
         $arguments = $this->request->getArguments();
         $settings = $this->getSettings();
@@ -202,37 +178,36 @@ class ReportController extends ActionController
                     if (is_array($error)) {
                         foreach ($error as $subErrorKey => $subError) {
                             $this->addFlashMessage(
-                                ucfirst($errorGroupKey) . ' / ' . ucfirst($subErrorKey) . ': ' . implode("\n",
+                                ucfirst((string) $errorGroupKey) . ' / ' . ucfirst($subErrorKey) . ': ' . implode("\n",
                                     $subError),
                                 '',
-                                AbstractMessage::ERROR);
+                                ContextualFeedbackSeverity::ERROR);
                         }
                     } else {
                         $this->addFlashMessage(
-                            ucfirst($errorGroupKey) . ': ' . ucfirst($error),
+                            ucfirst((string) $errorGroupKey) . ': ' . ucfirst((string) $error),
                             '',
-                            AbstractMessage::ERROR
+                            ContextualFeedbackSeverity::ERROR
                         );
                     }
                 }
             }
             // return to create page
-            $this->forwardToReferringRequest();
+            return $this->forwardToReferringRequest();
         }
 
         // if there weren't any errors, save report to typo3
         $this->reportRepository->add($newReport);
         $this->addFlashMessage('Report was created!');
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
     /**
      * action edit
      *
-     * @param Report $report
      * @return void
-     * @Extbase\IgnoreValidation("report")
      */
+    #[Extbase\IgnoreValidation(['argumentName' => 'report'])]
     public function editAction(Report $report): ResponseInterface
     {
         $activities = $this->activityRepository->findAll();
@@ -251,36 +226,30 @@ class ReportController extends ActionController
     /**
      * action update
      *
-     * @param Report $report
-     * @return void
-     * @throws StopActionException
-     * @throws UnsupportedRequestTypeException
+     * @return ResponseInterface
      * @throws IllegalObjectTypeException
      * @throws UnknownObjectException
      */
-    public function updateAction(Report $report): void
+    public function updateAction(Report $report): ResponseInterface
     {
         $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/typo3cms/extensions/extension_builder/User/Index.html',
-            '', AbstractMessage::WARNING);
+            '', ContextualFeedbackSeverity::WARNING);
         $this->reportRepository->update($report);
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
     /**
      * action delete
      *
-     * @param Report $report
-     * @return void
+     * @return ResponseInterface
      * @throws IllegalObjectTypeException
-     * @throws StopActionException
-     * @throws UnsupportedRequestTypeException
      */
-    public function deleteAction(Report $report): void
+    public function deleteAction(Report $report): ResponseInterface
     {
         $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/typo3cms/extensions/extension_builder/User/Index.html',
-            '', AbstractMessage::WARNING);
+            '', ContextualFeedbackSeverity::WARNING);
         $this->reportRepository->remove($report);
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
     private function getSettings(): array
@@ -288,7 +257,7 @@ class ReportController extends ActionController
         $cleanSettings = [];
         $settings = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('wp_deqar_reports');
         foreach ($settings as $key => $setting) {
-            $key = str_replace('.', '', $key);
+            $key = str_replace('.', '', (string) $key);
             $cleanSettings[$key] = $setting;
         }
         return $cleanSettings;
@@ -302,11 +271,11 @@ class ReportController extends ActionController
      * @throws ExistingTargetFileNameException
      * @throws InsufficientFolderAccessPermissionsException
      */
-    private function uploadFalFile($fileData, $folder)
+    private function uploadFalFile($fileData, $folder): FileReference
     {
-        $uploadDir = GeneralUtility::getFileAbsFileName('fileadmin/' . ltrim($folder, '/'));
+        $uploadDir = GeneralUtility::getFileAbsFileName('fileadmin/' . ltrim((string) $folder, '/'));
         if (!is_dir($uploadDir) && !mkdir($uploadDir, 0777, true) && !is_dir($uploadDir)) {
-            throw new RuntimeException(sprintf('Directory "%s" was not created', $uploadDir));
+            throw new RuntimeException(sprintf('Directory "%s" was not created', $uploadDir), 6_838_054_980);
         }
 
         $storageRepository = GeneralUtility::makeInstance(StorageRepository::class);
@@ -326,7 +295,7 @@ class ReportController extends ActionController
     {
         $languageKeys = [];
         $settings = $this->getSettings();
-        $languages = array_map('trim', explode(',', $settings['report_languages']));
+        $languages = array_map('trim', explode(',', (string) $settings['report_languages']));
         foreach ($languages as $language) {
             $languageKeys[$language] = $language;
         }
@@ -349,7 +318,6 @@ class ReportController extends ActionController
     }
 
     /**
-     * @param Report $report
      * @return Report
      */
     private function addPrefills(Report $report): Report
@@ -475,25 +443,5 @@ class ReportController extends ActionController
         $this->view->assign('institutionReports', $institutionReports);
         $this->view->assign('settings', $this->getSettings());
         return $this->htmlResponse();
-    }
-
-    public function injectReportRepository(ReportRepository $reportRepository): void
-    {
-        $this->reportRepository = $reportRepository;
-    }
-
-    public function injectActivityRepository(ActivityRepository $activityRepository): void
-    {
-        $this->activityRepository = $activityRepository;
-    }
-
-    public function injectDecisionRepository(DecisionRepository $decisionRepository): void
-    {
-        $this->decisionRepository = $decisionRepository;
-    }
-
-    public function injectDecarConnector(DeqarConnector $decarConnector): void
-    {
-        $this->decarConnector = $decarConnector;
     }
 }

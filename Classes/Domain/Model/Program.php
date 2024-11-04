@@ -29,8 +29,8 @@ class Program extends AbstractEntity
      * programmeNamePrimary
      *
      * @var string
-     * @Extbase\Validate("NotEmpty")
      */
+    #[Extbase\Validate(['validator' => 'NotEmpty'])]
     protected $programmeNamePrimary = '';
 
     /**
@@ -70,7 +70,7 @@ class Program extends AbstractEntity
      * @param int $programmeIdentifier
      * @return void
      */
-    public function setProgrammeIdentifier($programmeIdentifier)
+    public function setProgrammeIdentifier($programmeIdentifier): void
     {
         $this->programmeIdentifier = $programmeIdentifier;
     }
@@ -91,7 +91,7 @@ class Program extends AbstractEntity
      * @param string $programmeNamePrimary
      * @return void
      */
-    public function setProgrammeNamePrimary($programmeNamePrimary)
+    public function setProgrammeNamePrimary($programmeNamePrimary): void
     {
         $this->programmeNamePrimary = $programmeNamePrimary;
     }
@@ -112,7 +112,7 @@ class Program extends AbstractEntity
      * @param string $programmeQualificationPrimary
      * @return void
      */
-    public function setProgrammeQualificationPrimary($programmeQualificationPrimary)
+    public function setProgrammeQualificationPrimary($programmeQualificationPrimary): void
     {
         $this->programmeQualificationPrimary = $programmeQualificationPrimary;
     }
@@ -133,7 +133,7 @@ class Program extends AbstractEntity
      * @param string $programmeNqfLevel
      * @return void
      */
-    public function setProgrammeNqfLevel($programmeNqfLevel)
+    public function setProgrammeNqfLevel($programmeNqfLevel): void
     {
         $this->programmeNqfLevel = $programmeNqfLevel;
     }
@@ -154,7 +154,7 @@ class Program extends AbstractEntity
      * @param int $programmeGfEheaLevel
      * @return void
      */
-    public function setProgrammeGfEheaLevel($programmeGfEheaLevel)
+    public function setProgrammeGfEheaLevel($programmeGfEheaLevel): void
     {
         $this->programmeGfEheaLevel = $programmeGfEheaLevel;
     }

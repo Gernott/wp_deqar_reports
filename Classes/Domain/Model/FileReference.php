@@ -22,7 +22,7 @@ class FileReference extends AbstractFileFolder
     /**
      * @param ResourceInterface $originalResource
      */
-    public function setOriginalResource(ResourceInterface $originalResource)
+    public function setOriginalResource(ResourceInterface $originalResource): void
     {
         $this->originalResource = $originalResource;
         $this->uidLocal = (int)$originalResource->getUid();
