@@ -1,6 +1,7 @@
 <?php
 namespace WEBprofil\WpDeqarReports\Domain\Repository;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
@@ -20,7 +21,7 @@ class ActivityRepository extends Repository
     public function initializeObject(): void
     {
         /** @var $defaultQuerySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
-        $defaultQuerySettings = $this->objectManager->get(Typo3QuerySettings::class);
+        $defaultQuerySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
         $defaultQuerySettings->setRespectStoragePage(false);
         $this->setDefaultQuerySettings($defaultQuerySettings);
     }

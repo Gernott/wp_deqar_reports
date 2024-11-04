@@ -1,8 +1,0 @@
-config.tx_extbase {
-    persistence {
-        classes {
-            WEBprofil\WpDeqarReports\Domain\Model\FileReference.mapping.tableName = sys_file_reference
-        }
-    }
-}
-

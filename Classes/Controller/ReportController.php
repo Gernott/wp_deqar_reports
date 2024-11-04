@@ -43,7 +43,6 @@ class ReportController extends ActionController
         protected DecisionRepository $decisionRepository,
         protected DeqarConnector $decarConnector)
     {
-        parent::__construct();
     }
 
     /**
@@ -64,6 +63,7 @@ class ReportController extends ActionController
         $this->view->assign('year', $arguments['year']);
         $this->view->assign('reports', $reports);
         $this->view->assign('settings', $this->getSettings());
+
         return $this->htmlResponse();
     }
 
