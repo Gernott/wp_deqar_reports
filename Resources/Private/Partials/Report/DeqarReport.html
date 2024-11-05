@@ -41,7 +41,7 @@
     <!--@formatter:off-->
     <td nowrap="nowrap" class="">
         <f:for each="{report.deqarData.report_files}" as="file" >
-            <a href="https://backend.deqar.eu/{file.file}" class="btn btn-default btn-sm"
+            <a href="{file.file}" class="btn btn-default btn-sm"
                target="_blank">{file.file_display_name}<f:if condition="{settings.show.file_report_language}"> (<f:for each="{file.languages}" as="language" >{language}</f:for>)</f:if></a> <br>
         </f:for>
     </td>

@@ -5,10 +5,16 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+use TYPO3\CMS\Core\Http\UploadedFile;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Imaging\IconSize;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
+use TYPO3\CMS\Core\Utility\StringUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentNameException;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use WEBprofil\WpDeqarReports\Domain\Model\FileReference;
 use WEBprofil\WpDeqarReports\Domain\Repository\ActivityRepository;
 use WEBprofil\WpDeqarReports\Domain\Repository\DecisionRepository;
 use WEBprofil\WpDeqarReports\Connector\DeqarConnector;
@@ -21,7 +27,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
-use WEBprofil\WpDeqarReports\Domain\Model\FileReference;
 use WEBprofil\WpDeqarReports\Domain\Model\Program;
 use WEBprofil\WpDeqarReports\Domain\Model\Report;
 use WEBprofil\WpDeqarReports\Domain\Repository\ReportRepository;
@@ -162,25 +167,32 @@ class ReportController extends ActionController
      * @return ResponseInterface
      * @throws IllegalObjectTypeException
      * @throws ExistingTargetFileNameException
+     * @throws InsufficientFolderAccessPermissionsException
+     * @throws InvalidArgumentNameException
      */
     public function createAction(Report $newReport): ResponseInterface
     {
         $arguments = $this->request->getArguments();
         $settings = $this->getSettings();
 
+        /** @var UploadedFile $fileOriginalLocation */
+        $fileOriginalLocation = $arguments['fileOriginalLocation'];
+
         // upload original file
-        if ($arguments['fileOriginalLocation']['tmp_name'] !== '') {
+        if ($fileOriginalLocation) {
             $fileReference = $this->uploadFalFile(
-                $arguments['fileOriginalLocation'],
+                $fileOriginalLocation,
                 $settings['upload_path']
             );
             $newReport->setFileOriginalLocation($fileReference);
         }
 
+        /** @var UploadedFile $serReportFile */
+        $serReportFile = $arguments['serReportFile'];
         // upload ser report file
-        if ($arguments['serReportFile']['tmp_name'] !== '') {
+        if ($serReportFile) {
             $fileReference = $this->uploadFalFile(
-                $arguments['serReportFile'],
+                $serReportFile,
                 $settings['upload_path']
             );
             $newReport->setSerReportFile($fileReference);
@@ -190,6 +202,7 @@ class ReportController extends ActionController
         $newReport->setPid($settings['pid']);
         // and imploded institutionDeqarIds
         $newReport->setInstitutionDeqarId(implode(',', $arguments['institutionDeqarId']));
+
 
         // add all the programs as inline
         foreach ($arguments['programs']['programmeIdentifier'] as $key => $programmeIdentifier) {
@@ -201,7 +214,6 @@ class ReportController extends ActionController
             $program->setProgrammeGfEheaLevel($arguments['programs']['programmeGfEheaLevel'][$key]);
             $newReport->addProgram($program);
         }
-
         // and set prefill values for fields that weren't shown
         $newReport = $this->addPrefills($newReport);
 
@@ -309,27 +321,36 @@ class ReportController extends ActionController
     /**
      * Moves a file to a folder and returns the file reference
      *
-     * @param $fileData
+     * @param UploadedFile $fileData
      * @param $folder
      * @throws ExistingTargetFileNameException
      * @throws InsufficientFolderAccessPermissionsException
      */
-    private function uploadFalFile($fileData, $folder): FileReference
+    private function uploadFalFile(UploadedFile $fileData, $folder): FileReference
     {
+
+        $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
         $uploadDir = GeneralUtility::getFileAbsFileName('fileadmin/' . ltrim((string) $folder, '/'));
         if (!is_dir($uploadDir) && !mkdir($uploadDir, 0777, true) && !is_dir($uploadDir)) {
             throw new RuntimeException(sprintf('Directory "%s" was not created', $uploadDir), 6_838_054_980);
         }
 
-        $storageRepository = GeneralUtility::makeInstance(StorageRepository::class);
         $newFileReference = GeneralUtility::makeInstance(FileReference::class);
-        if (!empty($fileData['name'])) {
-            $storage = $storageRepository->findByUid(1); #Fileadmin = 1
-            $saveFolder = $storage->getFolder($folder);
+        if ($fileData->getClientFilename() !== '') {
 
-            $fileObject = $storage->addFile($fileData['tmp_name'], $saveFolder, $fileData['name']);
-            //$fileName = $fileObject->getName();
-            $newFileReference->setOriginalResource($fileObject);
+            $storage = $resourceFactory->getDefaultStorage(); #Fileadmin = 1
+            $saveFolder = $storage->getFolder($folder);
+            $fileObject = $storage->addFile($fileData->getTemporaryFileName(), $saveFolder, $fileData->getClientFilename());
+
+            $newFalFileReference = $resourceFactory->createFileReferenceObject(
+                [
+                    'uid_local' => $fileObject->getUid(),
+                    'uid_foreign' => StringUtility::getUniqueId('NEW'),
+                    'uid' => StringUtility::getUniqueId('NEW'),
+                    'crop' => null,
+                ]
+            );
+            $newFileReference->setOriginalResource($newFalFileReference);
         }
         return $newFileReference;
     }

@@ -40,7 +40,7 @@
     <!--@formatter:off-->
     <td nowrap="nowrap" class="">
         <f:if condition="{report.fileOriginalLocation}">
-            <a href="/{report.fileOriginalLocation.originalResource.publicUrl}" class="btn btn-default btn-sm"
+            <a href="{report.fileOriginalLocation.originalResource.publicUrl}" class="btn btn-default btn-sm"
                target="_blank">{report.fileDisplayName}<f:if condition="{settings.show.file_report_language}"> ({report.fileReportLanguage})</f:if></a>
         </f:if>
     </td>
@@ -48,8 +48,18 @@
     <f:if condition="{settings.show.ser_report_file}">
         <td nowrap="nowrap" class="">
             <f:if condition="{report.serReportFile}">
-                <a href="/{report.serReportFile.originalResource.publicUrl}" target="_blank"
-                   class="btn btn-default btn-sm">{report.serReportName}</a>
+                <a href="{report.serReportFile.originalResource.publicUrl}" target="_blank"
+                   class="btn btn-default btn-sm"><f:spaceless>
+                    <f:if condition="{report.serReportName}">
+                        <f:then>
+                            {report.serReportName}
+                        </f:then>
+                        <f:else>
+                            {report.serReportFile.originalResource.name}
+                        </f:else>
+                    </f:if>
+                </f:spaceless></a>
+
             </f:if>
         </td>
     </f:if>

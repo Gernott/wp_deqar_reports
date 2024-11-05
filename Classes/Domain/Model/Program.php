@@ -31,7 +31,7 @@ class Program extends AbstractEntity
      * @var string
      */
     #[Extbase\Validate(['validator' => 'NotEmpty'])]
-    protected $programmeNamePrimary = '';
+    protected string $programmeNamePrimary = '';
 
     /**
      * programmeQualificationPrimary

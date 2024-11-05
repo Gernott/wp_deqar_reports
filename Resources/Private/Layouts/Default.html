@@ -1,11 +1,5 @@
 <html xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" xmlns:f="http://www.w3.org/1999/XSL/Transform"
       data-namespace-typo3-fluid="true">
-<f:asset.css identifier="EXT:wp_deqar_reports/Resources/Public/Css/select2.min.css" />
-<f:be.pageRenderer
-        includeJavaScriptModules="{
-         0: '@webprofil/wp-deqar-reports/Scripts.js',
-      }"
-/>
 
 <f:render section="Before" arguments="{_all}" optional="true" />
 <div class="module {moduleClass}" data-module-id="{moduleId}" data-module-name="{moduleName}">
@@ -25,33 +19,94 @@
         <f:render section="content" arguments="{_all}" optional="true" />
 
     </div>
-<style type="text/css" nonce="{f:security.nonce()}">
-    #typo3-docheader .typo3-docheader-buttons {
-        height: 38px;
-    }
 
-    #typo3-docheader {
-        background: #eee;
-        z-index: 10;
-        position: relative;
-        padding: 10px;
-    }
+    <f:asset.css identifier="customcss" inline="1" useNonce="1">
+        #typo3-docheader .typo3-docheader-buttons {
+            height: 38px;
+        }
 
-    #typo3-docbody {
-        padding: 10px;
-    }
+        #typo3-docheader {
+            background: #eee;
+            z-index: 10;
+            position: relative;
+            padding: 10px;
+        }
 
-    form.tabpanel {
-        background: #f5f5f5;
-        padding: 20px;
-        border: 1px solid #c3c3c3;
-    }
+        #typo3-docbody {
+            padding: 10px;
+        }
 
-    hr {
-        background: #c3c3c3;
-    }
-</style>
+        form.tabpanel {
+            background: #f5f5f5;
+            padding: 20px;
+            border: 1px solid #c3c3c3;
+        }
 
-<script src="{f:uri.resource(path: 'EXT:wp_deqar_reports/Resources/Public/JavaScript/jquery.js')}" defer></script>
-<script src="{f:uri.resource(path: 'EXT:wp_deqar_reports/Resources/Public/JavaScript/Select2.js')}" defer></script>
-</html>
+        hr {
+            background: #c3c3c3;
+        }
+    </f:asset.css>
+
+    <f:asset.script identifier="customjquery" src="EXT:wp_deqar_reports/Resources/Public/JavaScript/jquery.js" />
+    <f:asset.script identifier="select2" src="EXT:wp_deqar_reports/Resources/Public/JavaScript/Select2.js" />
+
+    <f:asset.script identifier="custom" inline="1" useNonce="1">
+        function updateHardcopy() {
+            if ($('#hardcopy INPUT').is(':checked')) {
+                $('#serreportfile').hide();
+                $('#serreportfile INPUT').attr('disabled', 'disabled');
+            } else {
+                $('#serreportfile').show();
+                $('#serreportfile INPUT').removeAttr('disabled');
+                if ($('#serreportfile INPUT').get(0) && $('#serreportfile INPUT').get(0).files.length > 0) {
+                    $('#hardcopy').hide();
+                    $('#hardcopy INPUT').attr('disabled', 'disabled');
+                } else {
+                    $('#hardcopy').show();
+                    $('#hardcopy INPUT').removeAttr('disabled');
+                }
+            }
+        }
+        function updateType() {
+            if ($('#type').val() != 1) {
+                $('#programs').hide();
+            } else {
+                $('#programs').show();
+            }
+        }
+
+        $(document).ready(function () {
+
+            updateHardcopy();
+            updateType();
+            $('.select2').select2({
+                ajax: {
+                    url: '/?type=123',
+                    dataType: 'json',
+                    data: function (params) {
+                        var query = {
+                            search: params.term
+                        }
+                        // Query parameters will be ?search=[term]&type=public
+                        return query;
+                    }
+                }
+            });
+
+            $(document).on('click', '#addprogram', function (e) {
+                e.preventDefault();
+                var newProgramm = $('#newProgram').html();
+                $('.programs').append(newProgramm);
+                return false;
+            });
+
+            $(document).on('change', '#hardcopy, #serreportfile', function (e) {
+                updateHardcopy();
+            });
+            $(document).on('change', '#type', function (e) {
+                updateType();
+            });
+        });
+    </f:asset.script>
+
+</div>

@@ -2,7 +2,7 @@
 <hr>
 <f:if condition="{edit}">
     <f:else>
-        <label for="transferToDeqar">
+        <label class="form-label t3js-formengine-label" for="transferToDeqar">
             Transfer to Deqar
         </label><br/>
         <f:form.checkbox name="transferToDeqar" value="1"/>
@@ -11,7 +11,7 @@
 </f:if>
 
 <f:if condition="{settings.show.type}">
-    <label for="type">
+    <label class="form-label t3js-formengine-label" for="type">
         <f:translate key="tx_wpdeqarreports_domain_model_report.type"/>
         *
     </label><br/>
@@ -21,7 +21,7 @@
     <br/>
 </f:if>
 <f:if condition="{settings.show.agency}">
-    <label for="agency">
+    <label class="form-label t3js-formengine-label" for="agency">
         <f:translate key="tx_wpdeqarreports_domain_model_report.agency"/>
         *
     </label><br/>
@@ -30,7 +30,7 @@
     <br/>
 </f:if>
 <f:if condition="{settings.show.activity}">
-    <label for="activiy">
+    <label class="form-label t3js-formengine-label" for="activiy">
         <f:translate key="tx_wpdeqarreports_domain_model_report.activity"/>
         *
     </label><br/>
@@ -40,7 +40,7 @@
     <br/>
 </f:if>
 <f:if condition="{settings.show.activity_local_identifier}">
-    <label for="activityLocalIdentifier">
+    <label class="form-label t3js-formengine-label" for="activityLocalIdentifier">
         <f:translate key="tx_wpdeqarreports_domain_model_report.activity_local_identifier"/>
     </label><br/>
     <f:form.textfield class="form-control" property="activityLocalIdentifier"
@@ -48,7 +48,7 @@
     <br/>
 </f:if>
 <f:if condition="{settings.show.status}">
-    <label for="status">
+    <label class="form-label t3js-formengine-label" for="status">
         <f:translate key="tx_wpdeqarreports_domain_model_report.status"/>
         *
     </label><br/>
@@ -56,7 +56,7 @@
                    class="form-control" additionalAttributes="{required:'required'}"/>
     <br/>
 </f:if>
-<label for="decision">
+<label class="form-label t3js-formengine-label" for="decision">
     <f:translate key="tx_wpdeqarreports_domain_model_report.decision"/>
     *
 </label><br/>
@@ -64,7 +64,7 @@
                optionValueField="uid"
                class="form-control" additionalAttributes="{required:'required'}"/>
 <br/>
-<label for="validFrom">
+<label class="form-label t3js-formengine-label" for="validFrom">
     <f:translate key="tx_wpdeqarreports_domain_model_report.valid_from"/>
     *
 </label><br/>
@@ -74,7 +74,7 @@
 <f:form.hidden property="validFrom.dateFormat" value="Y-m-d"/>
 <br/>
 <f:if condition="{settings.show.valid_to}">
-    <label for="validTo">
+    <label class="form-label t3js-formengine-label" for="validTo">
         <f:translate key="tx_wpdeqarreports_domain_model_report.valid_to"/>
     </label><br/>
     <f:form.textfield class="form-control" property="validTo.date" value="{report.validTo->f:format.date()}"
@@ -83,21 +83,22 @@
     <br/>
 </f:if>
 <hr/>
-<label for="fileDisplayName">
+<label class="form-label t3js-formengine-label" for="fileDisplayName">
     <f:translate key="tx_wpdeqarreports_domain_model_report.file_display_name"/>
     *
 </label><br/>
 <f:form.textfield class="form-control" property="fileDisplayName"/>
 <br/>
-<label for="fileOriginalLocation">
+<label class="form-label t3js-formengine-label" for="fileOriginalLocation">
     <f:translate key="tx_wpdeqarreports_domain_model_report.file_original_location"/>
     *
 </label><br/>
 <f:form.upload name="fileOriginalLocation" additionalAttributes="{required:required}"/>
 <br/>
+<br/>
 
 <f:if condition="{settings.show.file_report_language}">
-    <label for="fileReportLanguage">
+    <label class="form-label t3js-formengine-label" for="fileReportLanguage">
         <f:translate key="tx_wpdeqarreports_domain_model_report.file_report_language"/>
         *
     </label><br/>
@@ -108,14 +109,15 @@
 <hr/>
 <div id="serreportfile">
     <f:if condition="{settings.show.ser_report_file}">
-        <label for="serReportFile">
+        <label class="form-label t3js-formengine-label" for="serReportFile">
             <f:translate key="tx_wpdeqarreports_domain_model_report.ser_report_file"/>
         </label><br/>
         <f:form.upload name="serReportFile"/>
         <br/>
+        <br/>
     </f:if>
     <f:if condition="{settings.show.ser_report_name}">
-        <label for="serReportName">
+        <label class="form-label t3js-formengine-label" for="serReportName">
             <f:translate key="tx_wpdeqarreports_domain_model_report.ser_report_name"/>
         </label><br/>
         <f:form.textfield class="form-control" property="serReportName"/>
@@ -124,7 +126,7 @@
     </f:if>
 </div>
 <f:if condition="{settings.show.institution_deqar_id}">
-    <label for="institutionDeqarId">
+    <label class="form-label t3js-formengine-label" for="institutionDeqarId">
         <f:translate key="tx_wpdeqarreports_domain_model_report.institution_deqar_id"/>
         *
     </label><br/>
@@ -136,7 +138,7 @@
 <f:if condition="{settings.show.hardcopy}">
     <div id="hardcopy">
         <br/>
-        <label for="hardcopy">
+        <label class="form-label t3js-formengine-label" for="hardcopy">
             <f:translate key="tx_wpdeqarreports_domain_model_report.hardcopy"/>
         </label><br/>
         <f:form.checkbox property="hardcopy" value="1"/>
