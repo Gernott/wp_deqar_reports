@@ -1,8 +1,12 @@
 <?php
 namespace WEBprofil\WpDeqarReports\Controller;
 
+use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Backend\Template\ModuleTemplate;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use WEBprofil\WpDeqarReports\Domain\Repository\ActivityRepository;
 use WEBprofil\WpDeqarReports\Domain\Repository\DecisionRepository;
 use WEBprofil\WpDeqarReports\Connector\DeqarConnector;
@@ -41,17 +45,27 @@ class ReportController extends ActionController
         protected ReportRepository $reportRepository,
         protected ActivityRepository $activityRepository,
         protected DecisionRepository $decisionRepository,
-        protected DeqarConnector $decarConnector)
+        protected DeqarConnector $decarConnector,
+        private readonly ModuleTemplateFactory $moduleTemplateFactory
+    )
     {
     }
+    protected function initializeModuleTemplate(ServerRequestInterface $request): ModuleTemplate
+    {
+        $moduleTemplate = $this->moduleTemplateFactory->create($request);
 
+        // Add common buttons and menues
+
+        return $moduleTemplate;
+    }
     /**
      * action list
      *
-     * @return void
+     * @return ResponseInterface
      */
     public function listAction(): ResponseInterface
     {
+        $moduleTemplate = $this->initializeModuleTemplate($this->request);
         $arguments = $this->request->getArguments();
 
         $typo3Reports = $this->reportRepository->findAll()->toArray();
@@ -59,30 +73,32 @@ class ReportController extends ActionController
         $reports = $this->decarConnector->getReports($typo3Reports, $arguments['year']);
         $years = $this->getYearsToFilter($typo3Reports);
 
-        $this->view->assign('years', $years);
-        $this->view->assign('year', $arguments['year']);
-        $this->view->assign('reports', $reports);
-        $this->view->assign('settings', $this->getSettings());
+        $moduleTemplate->assign('years', $years);
+        $moduleTemplate->assign('year', $arguments['year']);
+        $moduleTemplate->assign('reports', $reports);
+        $moduleTemplate->assign('settings', $this->getSettings());
 
-        return $this->htmlResponse();
+        return $moduleTemplate->renderResponse('Report/List');
     }
 
     /**
      * action show
      *
-     * @return void
+     * @return ResponseInterface
      */
     public function showAction(Report $report): ResponseInterface
     {
-        $this->view->assign('report', $report);
-        $this->view->assign('settings', GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('wp_deqar_reports'));
-        return $this->htmlResponse();
+        $moduleTemplate = $this->initializeModuleTemplate($this->request);
+        $moduleTemplate->assign('report', $report);
+        $moduleTemplate->assign('settings', GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('wp_deqar_reports'));
+
+        return $moduleTemplate->renderResponse('Report/Show');
     }
 
     /**
      * action getInstitutions
      *
-     * @return false|string|void
+     * @return ResponseInterface
      */
     public function getInstitutionsAction(): ResponseInterface
     {
@@ -99,7 +115,7 @@ class ReportController extends ActionController
     /**
      * action new
      *
-     * @return void
+     * @return ResponseInterface
      */
     public function newAction(): ResponseInterface
     {
@@ -107,11 +123,12 @@ class ReportController extends ActionController
         $decisions = $this->decisionRepository->findAll();
         $languages = $this->getLanguages();
 
-        $this->view->assign('settings', $this->getSettings());
-        $this->view->assign('activities', $activities);
-        $this->view->assign('decisions', $decisions);
-        $this->view->assign('languages', $languages);
-        return $this->htmlResponse();
+        $moduleTemplate = $this->initializeModuleTemplate($this->request);
+        $moduleTemplate->assign('settings', $this->getSettings());
+        $moduleTemplate->assign('activities', $activities);
+        $moduleTemplate->assign('decisions', $decisions);
+        $moduleTemplate->assign('languages', $languages);
+        return $moduleTemplate->renderResponse('Report/New');
     }
 
     /**
@@ -205,7 +222,7 @@ class ReportController extends ActionController
     /**
      * action edit
      *
-     * @return void
+     * @return ResponseInterface
      */
     #[Extbase\IgnoreValidation(['argumentName' => 'report'])]
     public function editAction(Report $report): ResponseInterface
@@ -214,13 +231,14 @@ class ReportController extends ActionController
         $decisions = $this->decisionRepository->findAll();
         $languages = $this->getLanguages();
 
-        $this->view->assign('settings', $this->getSettings());
-        $this->view->assign('activities', $activities);
-        $this->view->assign('decisions', $decisions);
-        $this->view->assign('languages', $languages);
-        $this->view->assign('report', $report);
-        $this->view->assign('edit', true);
-        return $this->htmlResponse();
+        $moduleTemplate = $this->initializeModuleTemplate($this->request);
+        $moduleTemplate->assign('settings', $this->getSettings());
+        $moduleTemplate->assign('activities', $activities);
+        $moduleTemplate->assign('decisions', $decisions);
+        $moduleTemplate->assign('languages', $languages);
+        $moduleTemplate->assign('report', $report);
+        $moduleTemplate->assign('edit', true);
+        return $moduleTemplate->renderResponse('Report/Edit');
     }
 
     /**
@@ -390,7 +408,7 @@ class ReportController extends ActionController
     /**
      * action plugin
      *
-     * @return void
+     * @return ResponseInterface
      */
     public function pluginAction(): ResponseInterface
     {
@@ -438,10 +456,11 @@ class ReportController extends ActionController
             }
         }
 
-        $this->view->assign('arguments', $arguments);
-        $this->view->assign('reports', $reports);
-        $this->view->assign('institutionReports', $institutionReports);
-        $this->view->assign('settings', $this->getSettings());
-        return $this->htmlResponse();
+        $moduleTemplate = $this->initializeModuleTemplate($this->request);
+        $moduleTemplate->assign('arguments', $arguments);
+        $moduleTemplate->assign('reports', $reports);
+        $moduleTemplate->assign('institutionReports', $institutionReports);
+        $moduleTemplate->assign('settings', $this->getSettings());
+        return $moduleTemplate->renderResponse('Report/Plugin');
     }
 }

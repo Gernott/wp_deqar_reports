@@ -2,40 +2,31 @@
 
 namespace WEBprofil\WpDeqarReports\Domain\Model;
 
-use TYPO3\CMS\Core\Resource\ResourceInterface;
-use TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
-use TYPO3\CMS\Extbase\Domain\Model\AbstractFileFolder;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
-class FileReference extends AbstractFileFolder
+class FileReference extends AbstractEntity
 {
 
     /**
      * Uid of the referenced sys_file. Needed for extbase to serialize the
      * reference correctly.
-     *
-     * @var int
      */
-    protected $uidLocal;
+    protected ?int $uidLocal = null;
 
-    /**
-     * @param ResourceInterface $originalResource
-     */
-    public function setOriginalResource(ResourceInterface $originalResource): void
+    protected ?\TYPO3\CMS\Core\Resource\FileReference $originalResource = null;
+
+    public function setOriginalResource(\TYPO3\CMS\Core\Resource\FileReference $originalResource): void
     {
         $this->originalResource = $originalResource;
-        $this->uidLocal = (int)$originalResource->getUid();
+        $this->uidLocal = $originalResource->getOriginalFile()->getUid();
     }
 
-    /**
-     * @return \TYPO3\CMS\Core\Resource\FileReference
-     * @throws ResourceDoesNotExistException
-     */
-    public function getOriginalResource()
+    public function getOriginalResource(): \TYPO3\CMS\Core\Resource\FileReference
     {
         if ($this->originalResource === null) {
-            $this->originalResource = GeneralUtility::makeInstance(ResourceFactory::class)->getFileReferenceObject($this->getUid());
+            $this->originalResource = GeneralUtility::makeInstance(ResourceFactory::class)->getFileReferenceObject($uid);
         }
 
         return $this->originalResource;

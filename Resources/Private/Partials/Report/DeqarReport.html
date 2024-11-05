@@ -2,7 +2,9 @@
 <tr >
     <f:if condition="{settings.show.type}">
         <td nowrap="nowrap" class="col-icon" title="{f:translate(id: 'report_type_{report.type}')}">
-            <f:image src="EXT:wp_deqar_reports/Resources/Public/Icons/report_type_{report.type}.svg" width="30"/>
+            <f:if condition="{report.type} == 1 || {report.type} == 2 || {report.type} == 3">
+                <f:image src="EXT:wp_deqar_reports/Resources/Public/Icons/report_type_{report.type}.svg" width="30"/>
+            </f:if>
         </td>
     </f:if>
     <td nowrap="nowrap" class="col-icon">

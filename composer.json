@@ -4,24 +4,16 @@
   "license": "GPL-2.0-or-later",
   "type": "typo3-cms-extension",
   "require": {
-    "typo3/cms-core": "^12.4"
+    "typo3/cms-core": "^13.4"
   },
   "autoload": {
     "psr-4": {
       "WEBprofil\\WpDeqarReports\\": "Classes"
     }
   },
-  "autoload-dev": {
-    "psr-4": {
-      "WEBprofil\\WpDeqarReports\\Tests\\": "Tests"
-    }
-  },
   "extra": {
     "typo3/cms": {
       "extension-key": "wp_deqar_reports"
     }
-  },
-  "replace": {
-    "typo3-ter/wp-deqar-reports": "self.version"
   }
 }

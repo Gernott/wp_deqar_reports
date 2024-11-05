@@ -46,13 +46,6 @@ call_user_func(
             }
        }'
         );
-        $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
-
-        $iconRegistry->registerIcon(
-            'wp_deqar_reports-plugin-deqar',
-            \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-            ['source' => 'EXT:wp_deqar_reports/Resources/Public/Icons/user_mod_deqar.svg']
-        );
 
     }
 );

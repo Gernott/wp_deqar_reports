@@ -5,6 +5,7 @@ namespace WEBprofil\WpDeqarReports\Connector;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use WEBprofil\WpDeqarReports\Domain\Model\Program;
 use WEBprofil\WpDeqarReports\Domain\Model\Report;
 
