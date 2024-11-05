@@ -1,38 +1,31 @@
-<html xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" xmlns:f="http://www.w3.org/1999/XSL/Transform"
+      data-namespace-typo3-fluid="true">
 <f:asset.css identifier="EXT:wp_deqar_reports/Resources/Public/Css/select2.min.css" />
+<f:be.pageRenderer
+        includeJavaScriptModules="{
+         0: '@webprofil/wp-deqar-reports/Scripts.js',
+      }"
+/>
 
-    <div class="typo3-fullDoc" >
-        <div id="typo3-docheader">
-            <div class="typo3-docheader-functions">
-                <div class="left">
-<!--                    f:be.buttons.csh-->
-                </div>
-                <div class="right">
-                    <f:be.pagePath/>
-                    <f:be.pageInfo/>
-                </div>
-            </div>
-            <div class="typo3-docheader-buttons">
-                <div class="left">
-                    <f:link.action action="new" controller="Report" class="btn btn-default">
-                        <core:icon identifier="actions-document-new"/>
-                        Add new Report
-                    </f:link.action>
-                </div>
-                <div class="right">
-<!--                    f:be.buttons.shortcut-->
-                </div>
-            </div>
+<f:render section="Before" arguments="{_all}" optional="true" />
+<div class="module {moduleClass}" data-module-id="{moduleId}" data-module-name="{moduleName}">
 
-        </div>
-        <div id="typo3-docbody">
-            <div id="typo3-inner-docbody">
-                <f:flashMessages/>
-                <f:render section="content"/>
+    <f:if condition="{docHeader.enabled}">
+        <f:render partial="DocHeader" arguments="{docHeader:docHeader}" />
+    </f:if>
+
+    <div class="module-body t3js-module-body">
+        <f:if condition="{uiBlock}">
+            <div id="t3js-ui-block" class="ui-block">
+                <core:icon identifier="spinner-circle" size="large" />
             </div>
-        </div>
+        </f:if>
+        <f:flashMessages queueIdentifier="{flashMessageQueueIdentifier}" />
+
+        <f:render section="content" arguments="{_all}" optional="true" />
+
     </div>
-<style type="text/css">
+<style type="text/css" nonce="{f:security.nonce()}">
     #typo3-docheader .typo3-docheader-buttons {
         height: 38px;
     }
@@ -59,5 +52,6 @@
     }
 </style>
 
+<script src="{f:uri.resource(path: 'EXT:wp_deqar_reports/Resources/Public/JavaScript/jquery.js')}" defer></script>
 <script src="{f:uri.resource(path: 'EXT:wp_deqar_reports/Resources/Public/JavaScript/Select2.js')}" defer></script>
 </html>

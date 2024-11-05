@@ -2,11 +2,13 @@
 namespace WEBprofil\WpDeqarReports\Controller;
 
 use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use WEBprofil\WpDeqarReports\Domain\Repository\ActivityRepository;
 use WEBprofil\WpDeqarReports\Domain\Repository\DecisionRepository;
 use WEBprofil\WpDeqarReports\Connector\DeqarConnector;
@@ -46,7 +48,8 @@ class ReportController extends ActionController
         protected ActivityRepository $activityRepository,
         protected DecisionRepository $decisionRepository,
         protected DeqarConnector $decarConnector,
-        private readonly ModuleTemplateFactory $moduleTemplateFactory
+        private readonly ModuleTemplateFactory $moduleTemplateFactory,
+        protected readonly IconFactory $iconFactory,
     )
     {
     }
@@ -54,9 +57,31 @@ class ReportController extends ActionController
     {
         $moduleTemplate = $this->moduleTemplateFactory->create($request);
 
-        // Add common buttons and menues
+        // doc header in backend module
+        $this->registerDocHeader($moduleTemplate);
 
         return $moduleTemplate;
+    }
+
+    protected function registerDocHeader(ModuleTemplate $view)
+    {
+        $buttonBar = $view->getDocHeaderComponent()->getButtonBar();
+
+        $createNewButton = $buttonBar->makeLinkButton()
+            ->setHref($this->uriBuilder->reset()->uriFor('new'))
+            ->setTitle('Add new Report')
+            ->setIcon($this->iconFactory->getIcon('actions-document-new', IconSize::SMALL))
+            ->setShowLabelText(true);
+
+        $buttonBar->addButton($createNewButton);
+
+        // Shortcut
+        $shortcutButton = $buttonBar->makeShortcutButton()
+            ->setRouteIdentifier('web_WpDeqarReportsDeqar')
+            ->setArguments(['id' => 1])
+            ->setDisplayName('DEQAR Reports');
+
+        $buttonBar->addButton($shortcutButton, ButtonBar::BUTTON_POSITION_RIGHT);
     }
     /**
      * action list
